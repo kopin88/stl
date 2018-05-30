@@ -36,7 +36,7 @@
 
 <script>
 // import Camera from './pages/Camera.vue';
-import Home from './pages/Home.vue';
+// import Home from './pages/Home.vue';
 import POS from './pages/POS.vue';
 import Account from './pages/Account.vue';
 // import Forms from './pages/Forms.vue';
