@@ -2,7 +2,7 @@
   <v-ons-toolbar style="backgroundColor:#43A047">
     <div class="left">
       <slot name="left">
-        <v-ons-back-button v-if="backLabel" color="white">
+        <v-ons-back-button v-if="backLabel">
           {{ backLabel }}
         </v-ons-back-button>
       </slot>
