@@ -113,7 +113,8 @@
 		      :visible="modalVisible"
 		    >
 		      <p style="text-align: center">
-		        Save <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+		        <!-- Save <v-ons-icon icon="fa-spinner" spin></v-ons-icon> -->
+			      <v-ons-progress-circular indeterminate></v-ons-progress-circular>
 		      </p>
 		    </v-ons-modal>
 	</v-ons-page>

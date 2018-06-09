@@ -12,6 +12,7 @@ import VueOnsen from 'vue-onsenui'; // For UMD
 // import * as OnsenComponents from './onsen-components'; // For ESM
 import storeLike from './store.js';
 import CustomToolbar from './partials/CustomToolbar.vue';
+import SearchToolbar from './partials/SearchToolbar.vue';
 import AppNavigator from './AppNavigator.vue';
 
 Vue.use(Vuex);
@@ -20,6 +21,7 @@ Vue.use(VueOnsen);
 // Register components globally
 // Object.values(OnsenComponents).forEach(component => Vue.component(component.name, component)); // For ESM
 Vue.component('custom-toolbar', CustomToolbar); // Common toolbar
+Vue.component('search-toolbar', SearchToolbar); // Common toolbar
 
 new Vue({
   el: '#app',

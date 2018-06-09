@@ -1,94 +1,97 @@
 <template>
 <v-ons-page>
-  <page-toolbar :title="item.name"></page-toolbar>
-  <v-ons-card style="margin-top:63px; padding-bottom:80px">
-    <img :src="imgLink + item.image" style="width: 100%">
+  <custom-toolbar backLabel="Anim" :title="title"></custom-toolbar>
+  <v-ons-card>
     <v-ons-list>
-      <v-ons-list-header>Detail info</v-ons-list-header>
+      <v-ons-list-header>Item detail info</v-ons-list-header>
+
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-assignment-check" style="color: green;" class="list-item__icon"></v-ons-icon>
+          <v-ons-text>Name :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            {{ item.type.name }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.name}}
+        </div>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-label-alt" style="color: green;" class="list-item__icon"></v-ons-icon>
+          <v-ons-text>Code :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            {{ item.brand.name }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.code}}
+        </div>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-face" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-text>Type :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            {{ item.name }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.type.name}}
+        </div>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-text>Brand :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            {{ item.code }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.brand.name}}
+        </div>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-assignment" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-text>Description</v-ons-text>
         </div>
-        <label class="center">
-          {{ item.descriptions }}
-        </label>
-      </v-ons-list-item>
-    </v-ons-list>
-    <br>
-    <v-ons-list>
-      <v-ons-list-item>
-        <div class="left">
-          <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
+        <div class="center">
+          {{item.descriptions}}
         </div>
-        <label class="center">
-          <v-ons-text>
-            Byu Price : {{ item.buy_price }}
-          </v-ons-text>
-        </label>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-text>Buy Price :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            Sale Price : {{ item.sale_price }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.buy_price}}
+        </div>
+        <div class="right">
+        </div>
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-text>Sale Price :</v-ons-text>
         </div>
-        <label class="center">
-          <v-ons-text>
-            Qty : {{ item.qty_total }}
-          </v-ons-text>
-        </label>
+        <div class="center">
+          {{item.sale_price}}
+        </div>
+        <div class="right">
+        </div>
+      </v-ons-list-item>
+      <v-ons-list-item>
+        <div class="left">
+          <v-ons-text>Balance :</v-ons-text>
+        </div>
+        <div class="center">
+          {{item.qty_total}}
+        </div>
+        <div class="right">
+        </div>
+      </v-ons-list-item>
+
+      <v-ons-list-item>
+        <img :src="imgLink + item.image" style="width: 100%">
       </v-ons-list-item>
     </v-ons-list>
   </v-ons-card>
-  <v-ons-fab position="bottom right" @click="$router.push('/items/'+ item.id + '/edit')">
+  <v-ons-fab position="bottom right" @click="EditItem(animation, item)">
 			<v-ons-icon icon="md-edit"></v-ons-icon>
 		</v-ons-fab>
 </v-ons-page>
@@ -98,17 +101,15 @@
 import Auth from '../../../store/auth'
 // import Flash from '../../../helpers/flash'
 import { get, del, apiDomain, imgUrl } from '../../../helpers/api'
-import PageToolbar from '../../Layout/Toolbar.vue'
+import ItemEdit from './Edit.vue'
 // import ItemIn from './ItemIn.vue'
 // import ItemOut from './ItemOut.vue'
 export default {
-  components: {
-    // ItemIn, ItemOut,
-    PageToolbar
-  },
   data() {
     return {
-      // backLink: 'items',
+      state: 'initial',
+      ratio: 0,
+      animation: 'default',
       imgLink: imgUrl + 'items/',
       authState: Auth.state,
       isRemoving: false,
@@ -117,25 +118,39 @@ export default {
         brand: {},
         type: {}
       },
-			// item: {}
     }
-  },
-  created() {
-    get( apiDomain + `/items/${this.$route.params.id}`)
-      .then((res) => {
-        this.item = res.data.item
-      })
   },
   methods: {
     remove() {
       this.isRemoving = false
-      del( apiDomain + `/items/${this.$route.params.id}`)
+      del( apiDomain + `/items/${this.item.id}`)
         .then((res) => {
           if (res.data.deleted) {
             // Flash.setSuccess('You have successfully deleted item!')
-            this.$router.push('/items')
+            // this.$router.push('/items')
           }
         })
+    },
+    EditItem(name, data) {
+      this.$store.commit('navigator/options', {
+        // Sets animations
+        animation: name,
+        form: data,
+        // Resets default options
+        callback: () => this.$store.commit('navigator/options', {})
+      });
+
+      this.$store.commit('navigator/push', {
+        extends: ItemEdit,
+        data() {
+          return {
+            animation: name,
+            form: data,
+            meta: 'edit',
+            title: "Edit Item",
+          }
+        }
+      });
     }
   }
 }

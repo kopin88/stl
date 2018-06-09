@@ -8,6 +8,10 @@
       <div class="title">Stock Out</div>
       <div class="content">Stock Out details</div>
     </v-ons-card>
+    <v-ons-card @click="itemPush(animation, items)">
+      <div class="title">Item list</div>
+      <div class="content">Item details</div>
+    </v-ons-card>
     <v-ons-card @click="customerPush(animation, customers)">
       <div class="title">Customers</div>
       <div class="content">Customer details</div>
@@ -20,6 +24,7 @@
 </template>
 
 <script>
+import ItemIndex from '../views/POS/Item/Index.vue';
 import CustomerIndex from '../views/POS/Customer/Index.vue';
 import SupplierIndex from '../views/POS/Supplier/Index.vue';
 import StockIn from '../views/POS/StockIn/Index.vue';
@@ -32,11 +37,16 @@ export default {
       animation: 'default',
       stockIns: apiDomain + `/stockins`,
       stockOuts: apiDomain + `/stockouts`,
+      items: [],
       customers: [],
       suppliers: [],
     };
   },
   created() {
+    get( apiDomain + `/items`)
+      .then((res) => {
+        this.items = res.data.items
+      })
     get( apiDomain + `/customers`)
       .then((res) => {
         this.customers = res.data.customers
@@ -47,6 +57,26 @@ export default {
       })
   },
   methods: {
+    itemPush(name, data) {
+      this.$store.commit('navigator/options', {
+        // Sets animations
+        animation: name,
+        items: data,
+        // Resets default options
+        callback: () => this.$store.commit('navigator/options', {})
+      });
+
+      this.$store.commit('navigator/push', {
+        extends: ItemIndex,
+        data() {
+          return {
+            animation: name,
+            items: data,
+            title: "Item List"
+          }
+        }
+      });
+    },
     customerPush(name, data) {
       this.$store.commit('navigator/options', {
         // Sets animations

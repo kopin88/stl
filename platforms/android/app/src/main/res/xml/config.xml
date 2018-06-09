@@ -11,11 +11,11 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
-    <name>Wan Yu</name>
+    <name>​ေရႊသီး​ေလး</name>
     <description>
-      Project for Wan Yu
+      Project for Shwe Tee Lay
     </description>
-    <author email="kopin88@gmail.com" href="http://wanyumm.com">
+    <author email="kopin88@gmail.com" href="http://stl.wanyumm.com">
       Ko Pin
     </author>
     <content src="index.html" />
@@ -30,7 +30,10 @@
     <icon density="ldpi" src="/res/icon/android/ldpi.png" />
     <icon density="mdpi" src="/res/icon/android/mdpi.png" />
     <icon density="hdpi" src="/res/icon/android/hdpi.png" />
+    <icon density="tvdpi" src="/res/icon/android/tvdpi.png" />
     <icon density="xhdpi" src="/res/icon/android/xhdpi.png" />
+    <icon density="xxhdpi" src="/res/icon/android/xxhdpi.png" />
+    <icon density="xxxhdpi" src="/res/icon/android/xxxhdpi.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="AndroidLaunchMode" value="singleTop" />
     <preference name="BackgroundColor" value="0xffffffff" />

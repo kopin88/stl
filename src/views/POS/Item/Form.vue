@@ -1,191 +1,146 @@
 <template>
 <v-ons-page>
-  <page-toolbar :title="title"></page-toolbar>
-    <v-ons-card style="margin-top:63px;">
-      <image-upload v-model="form.image"></image-upload>
-      <v-ons-text class="text__danger" v-if="error.image">{{"ပံု ထည့္ပါ"}}</v-ons-text>
+    <custom-toolbar backLabel="Anim" :title="title">
+      <template slot="right" v-if="(form.name != '') && (form.code != '') && (form.type_id != '') && (form.brand_id != '') && (form.descriptions != '') && (form.image != '')">
+        <v-ons-icon style="color:white" icon="md-check" :disabled="isProcessing" @click="save"></v-ons-icon>
+      </template>
+    </custom-toolbar>
+    <v-ons-card>
         <v-ons-list>
+
           <v-ons-list-header>Detail info</v-ons-list-header>
-          <!-- For Type  -->
-          <v-ons-list-item>
+
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''">
             <div class="left">
-              <v-ons-icon icon="md-assignment-check" style="color: green;" class="list-item__icon"></v-ons-icon>
+              <v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
-            <div class="center">
-              <v-ons-select style="width: 90%" v-model="form.type_id">
-                <option value="" disabled selected>Select Type</option>
+            <label class="center">
+              <v-ons-input type="text" placeholder="Item Name" v-model="form.name" float style="width:90%;font-family:Zawgyi-One;"> </v-ons-input>
+              <v-ons-text class="text__danger" v-if="error.name">{{ error.name[0] }}
+              </v-ons-text>
+            </label>
+          </v-ons-list-item>
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''">
+            <div class="left">
+              <v-ons-icon v-if="form.code != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+              <v-ons-input type="text" placeholder="Code" v-model="form.code" float style="width:90%;font-family:Zawgyi-One;"> </v-ons-input>
+              <v-ons-text class="text__danger" v-if="error.code">{{ error.code[0] }}
+              </v-ons-text>
+            </label>
+          </v-ons-list-item>
+
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="!addType">
+            <div class="left">
+              <v-ons-icon v-if="form.type_id != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+              <select class="form-control" style="width: 95%" v-model="form.type_id">
+                <option value="" disabled selected><label>Type ...</label></option>
                 <option v-for="type in option.types" :value="type.id">
-                  {{type.name}}
+                  {{ type.name }}
                 </option>
-              </v-ons-select>
-              <v-ons-text class="text__danger" v-if="error.type_id">{{"Type ေရြးပါ"}}</v-ons-text>
-            </div>
+              </select>
+            </label>
             <div class="right">
-              <!-- <span class="input-group-addon"> -->
-                <v-ons-text @click="addType = !addType">
-                  <v-ons-icon icon="md-plus" class="list-item__icon" v-if="!addType"> </v-ons-icon>
-                  <v-ons-icon icon="md-chevron-down" class="list-item__icon" v-if="addType"> </v-ons-icon>
-                </v-ons-text>
+              <!-- <ion-icon name="add-circle"></ion-icon> -->
+              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon" @click="newType" style="color: green;"></v-ons-icon>
             </div>
           </v-ons-list-item>
-          <v-ons-alert-dialog modifier="rowfooter" :visible.sync="addType">
-            <span slot="title">Create Type</span>
-            <v-ons-input float placeholder="Type Name" v-model="type.name" style="width:100%">
-            </v-ons-input>
-            <v-ons-input float placeholder="Type Description" v-model="type.descriptions" style="width:100%; margin-top:30px">
-            </v-ons-input>
-            <template slot="footer">
-              <div class="alert-dialog-button" @click="addType = false">Cancel</div>
-              <div class="alert-dialog-button"  @click="saveType" :disabled="isProcessingType">Save</div>
-            </template>
-          </v-ons-alert-dialog>
-
-          <!-- For Brand -->
-          <v-ons-list-item>
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="addType">
             <div class="left">
-              <v-ons-icon icon="md-label-alt" style="color: green;" class="list-item__icon"></v-ons-icon>
+              <v-ons-icon v-if="type.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
-            <div class="center">
-              <v-ons-select style="width: 90%" v-model="form.brand_id">
-                <option value="" disabled selected>Select Brand</option>
+            <label class="center">
+              <v-ons-input type="text" placeholder="Add Type" float style="width:95%;font-family:Zawgyi-One;" v-focus="typefocus" @focus="typefocus = true" @blur="typefocus = false" v-model="type.name"> </v-ons-input>
+              <v-ons-text class="text__danger" v-if="error.name">{{ error.name[0] }}
+              </v-ons-text>
+            </label>
+            <div class="right">
+              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon" @click="saveType" :disabled="isProcessingType" style="color: green;"></v-ons-icon>
+            </div>
+          </v-ons-list-item>
+
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="!addBrand">
+            <div class="left">
+              <v-ons-icon v-if="form.brand_id != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+              <select class="form-control" style="width: 95%" v-model="form.brand_id">
+                <option value="" disabled selected><label>Brand ...</label></option>
                 <option v-for="brand in option.brands" :value="brand.id">
-                  {{brand.name}}
+                  {{ brand.name }}
                 </option>
-              </v-ons-select>
-              <v-ons-text class="text__danger" v-if="error.brand_id">{{"Brand ေရြးပါ"}}</v-ons-text>
-            </div>
+              </select>
+            </label>
             <div class="right">
-              <!-- <span class="input-group-addon"> -->
-                <v-ons-text @click="addBrand = !addBrand">
-                  <v-ons-icon icon="md-plus" class="list-item__icon" v-if="!addBrand"> </v-ons-icon>
-                  <v-ons-icon icon="md-chevron-down" class="list-item__icon" v-if="addBrand"> </v-ons-icon>
+              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon" @click="newBrand" style="color: green;"></v-ons-icon>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="addBrand">
+            <div class="left">
+              <v-ons-icon v-if="brand.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+              <v-ons-input type="text" placeholder="Add Brand" float style="width:95%;font-family:Zawgyi-One;" v-focus="brandfocus" @focus="brandfocus = true" @blur="brandfocus = false" v-model="brand.name"> </v-ons-input>
+              <v-ons-text class="text__danger" v-if="error.name">{{ error.name[0] }}
+              </v-ons-text>
+            </label>
+            <div class="right">
+              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon" :disabled="isProcessingBrand" @click="saveBrand" style="color: green;"></v-ons-icon>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''">
+            <div class="left">
+              <v-ons-icon v-if="form.descriptions != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+                <v-ons-input type="text" placeholder="Description" v-model="form.descriptions" float style="width:90%;font-family:Zawgyi-One;"> </v-ons-input>
+                <v-ons-text class="text__danger" v-if="error.descriptions">{{ error.descriptions[0] }}
                 </v-ons-text>
-            </div>
-          </v-ons-list-item>
-          <v-ons-alert-dialog modifier="rowfooter" :visible.sync="addBrand">
-            <span slot="title">Create Brand</span>
-            <v-ons-input float placeholder="Brand Name" v-model="brand.name" style="width:100%">
-            </v-ons-input>
-            <v-ons-input float placeholder="Brand Description" v-model="brand.descriptions" style="width:100%; margin-top:30px">
-            </v-ons-input>
-            <template slot="footer">
-              <div class="alert-dialog-button" @click="addBrand = false">Cancel</div>
-              <div class="alert-dialog-button"  @click="saveBrand" :disabled="isProcessingBrand">Save</div>
-            </template>
-          </v-ons-alert-dialog>
-
-          <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-face" style="color: green;" class="list-item__icon"></v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="Name" v-model="form.name" style="width:100%">
-              </v-ons-input>
-              <v-ons-text class="text__danger" v-if="error.name">{{"Name ထည့္ပါ"}}</v-ons-text>
             </label>
           </v-ons-list-item>
           <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="Code" v-model="form.code" style="width:100%">
-              </v-ons-input>
-              <v-ons-text class="text__danger" v-if="error.code">{{"Code ထည့္ပါ"}}</v-ons-text>
-            </label>
-          </v-ons-list-item>
-          <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-assignment" style="color: green;" class="list-item__icon"> </v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="Description" v-model="form.descriptions" style="width:100%">
-              </v-ons-input>
-            </label>
-          </v-ons-list-item>
-        </v-ons-list>
-        <br>
-        <v-ons-list>
-          <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="Byu Price" v-model="form.byu_price" style="width:100%" v-if="editBuyPrice">
-              </v-ons-input>
-              <v-ons-text>
-                <label for="" v-if="!editBuyPrice">Buy Price : {{ form.sale_price }}</label>
-              </v-ons-text>
-            </label>
-            <label class="right">
-              <v-ons-icon icon="md-edit" style="color: green;" class="list-item__icon" @click="editBuyPrice = !editBuyPrice" v-if="!editBuyPrice"> </v-ons-icon>
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon" @click="editBuyPrice = !editBuyPrice" v-if="editBuyPrice"> </v-ons-icon>
-            </label>
-          </v-ons-list-item>
-          <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="Sale Price" v-model="form.sale_price" style="width:100%" v-if="editSalePrice">
-              </v-ons-input>
-              <v-ons-text>
-                <label for="" v-if="!editSalePrice">Sale Price : {{ form.sale_price }}</label>
-              </v-ons-text>
-            </label>
-            <label class="right">
-              <v-ons-icon icon="md-edit" style="color: green;" class="list-item__icon" @click="editSalePrice = !editSalePrice" v-if="!editSalePrice"> </v-ons-icon>
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon" @click="editSalePrice = !editSalePrice" v-if="editSalePrice"> </v-ons-icon>
-            </label>
-          </v-ons-list-item>
-          <v-ons-list-item>
-            <div class="left">
-              <v-ons-icon icon="md-smartphon" style="color: green;" class="list-item__icon"> </v-ons-icon>
-            </div>
-            <label class="center">
-              <v-ons-input float placeholder="QTY" v-model="form.qty_total" style="width:100%" v-if="editQTY">
-              </v-ons-input>
-              <v-ons-text>
-                <label for="" v-if="!editQTY">QTY : {{ form.qty_total }}</label>
-              </v-ons-text>
-              <v-ons-text class="text__danger" v-if="error.qty_total">{{" '0' ထည့္ေပးပါ"}}</v-ons-text>
-            </label>
-            <label class="right">
-              <v-ons-icon icon="md-edit" style="color: green;" class="list-item__icon" @click="editQTY = !editQTY" v-if="!editQTY"> </v-ons-icon>
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon" @click="editQTY = !editQTY" v-if="editQTY"> </v-ons-icon>
-            </label>
-          </v-ons-list-item>
-          <v-ons-list-item>
-            <div class="center">
-              <v-ons-button @click="$router.back()" :disabled="isProcessing">Cancel</v-ons-button>
-            </div>
-            <div class="right">
-              <v-ons-button @click="save" :disabled="isProcessing">Save</v-ons-button>
-            </div>
+            <image-upload v-model="form.image" style="width:100%"></image-upload>
+            <v-ons-text class="text__danger" v-if="error.image">{{"ပံု ထည့္ပါ"}}</v-ons-text>
           </v-ons-list-item>
         </v-ons-list>
     </v-ons-card>
+    <v-ons-modal
+      :visible="modalVisible"
+    >
+      <p style="text-align: center">
+        <v-ons-progress-circular indeterminate></v-ons-progress-circular>
+      </p>
+    </v-ons-modal>
 </v-ons-page>
 </template>
 <script>
 import Vue from 'vue'
-// import Flash from '../../../helpers/flash'
 import { get, post, apiDomain, imgUrl} from '../../../helpers/api'
 import { toMulipartedForm } from '../../../helpers/form'
 import ImageUpload from '../../../components/ImageUpload.vue'
-import PageToolbar from '../../Layout/Toolbar.vue'
+import { focus } from 'vue-focus';
+import ItemShow from './Show.vue'
 
-// import { toMulipartedForm } from '../../../helpers/form'
 export default {
-  components: {
-    ImageUpload,
-    PageToolbar
-  },
+  directives: { focus: focus },
+  components: { ImageUpload },
   data() {
     return {
       title: 'Create Item',
       addType: false,
       addBrand: false,
+      typefocus: false,
+      brandfocus: false,
       editQTY: false,
       editBuyPrice: false,
       editSalePrice: false,
@@ -197,6 +152,7 @@ export default {
         'brands': []
       },
       error: {},
+      modalVisible: false,
       isProcessing: false,
       isProcessingType: false,
       isProcessingBrand: false,
@@ -204,17 +160,12 @@ export default {
 
       initializeURL: apiDomain + `/items/create`,
       storeURL: apiDomain + `/items`,
-      typeURL: apiDomain + `/types`,
-      brandURL: apiDomain + `/brands`,
+      storeTypeURL: apiDomain + `/types`,
+      storeBrandURL: apiDomain + `/brands`,
       action: 'Create'
     }
   },
   created() {
-    if (this.$route.meta.mode === 'edit') {
-      this.initializeURL = apiDomain + `/items/${this.$route.params.id}/edit`
-      this.storeURL = apiDomain + `/items/${this.$route.params.id}?_method=PUT`
-      this.action = 'Update'
-    }
     get(this.initializeURL)
       .then((res) => {
         Vue.set(this.$data, 'form', res.data.form)
@@ -223,69 +174,81 @@ export default {
         Vue.set(this.$data, 'option', res.data.option)
       })
   },
-
   methods: {
+    newType() {
+      this.addType = !this.addType
+      this.typefocus = true
+    },
+    newBrand() {
+      this.addBrand = !this.addBrand
+      this.brandfocus = true
+    },
     save() {
-      const form = toMulipartedForm(this.form, this.$route.meta.mode)
+      this.modalVisible = true
+      this.form.buy_price = 0
+      this.form.sale_price = 0
+      this.form.qty_total = 0
+      const form = toMulipartedForm(this.form, 'create')
       post(this.storeURL, form)
-        .then((res) => {
-          if (res.data.saved) {
-            // Flash.setSuccess(res.data.message)
-            // this.$router.push(`/items/${res.data.id}`)
-            this.$router.push(`/items`)
-          }
-          this.isProcessing = false
-        })
-        .catch((err) => {
-          if (err.response.status === 422) {
-            this.error = err.response.data
-          }
-          this.isProcessing = false
-        })
+          .then((res) => {
+              if(res.data.saved) {
+                this.$store.commit('navigator/replace', {
+                  extends: ItemShow,
+                  data() {
+                    return {
+                      item: res.data.item,
+                      title: res.data.item.name
+                    }
+                  }
+                })
+              }
+              this.isProcessing = false
+          })
+    },
+    newType() {
+      this.addType = !this.addType
+      this.typefocus = true
     },
     saveType() {
-      const type = toMulipartedForm(this.type, this.$route.meta.mode)
-      post(this.typeURL, type)
-        .then((res) => {
-          if (res.data.saved) {
-            // Flash.setSuccess(res.data.message)
-          }
+      // this.isProcessingType = true
+      const type = toMulipartedForm(this.type, 'create')
+      post(this.storeTypeURL, type)
+      .then((res) => {
+        if(res.data.saved) {
           this.type.name = "",
           this.addType = false
           this.option.types.push(res.data.type)
           this.isProcessingType = false
-        })
-        .catch((err) => {
-          if (err.response.status === 322) {
-            this.error = err.response.data
-          }
-          this.isProcessingType = false
-        })
+        }
+        this.isProcessing = false
+      })
+    },
+    newBrand() {
+      this.addBrand = !this.addBrand
+      this.brandfocus = true
     },
     saveBrand() {
-      const brand = toMulipartedForm(this.brand, this.$route.meta.mode)
-      post(this.brandURL, brand)
-        .then((res) => {
-          if (res.data.saved) {
-            // Flash.setSuccess(res.data.message)
-            // this.$router.push(`/items/${res.data.id}`)
-          }
+      this.isProcessingBrand = true
+      const brand = toMulipartedForm(this.brand, 'create')
+      post(this.storeBrandURL, brand)
+      .then((res) => {
+        if(res.data.saved) {
           this.brand.name = ""
           this.addBrand = false
           this.option.brands.push(res.data.brand)
           this.isProcessingBrand = false
-        })
-        .catch((err) => {
-          if (err.response.status === 322) {
-            this.error = err.response.data
-          }
-          this.isProcessingBrand = false
-        })
-    }
+        }
+        this.isProcessing = false
+      })
+    },
   }
 }
 </script>
 
 <style scoped>
-
+.wy-bgcolor {
+  background-color: rgb(30, 136, 229);
+  transition: all 0s;
+  /*border-radius: 10%*/
+}
 </style>

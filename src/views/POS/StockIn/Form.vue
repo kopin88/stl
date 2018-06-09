@@ -198,6 +198,13 @@
             </div>
       </v-ons-list>
     </v-ons-card>
+    <v-ons-modal
+      :visible="modalVisible"
+    >
+      <p style="text-align: center">
+        <v-ons-progress-circular indeterminate></v-ons-progress-circular>
+      </p>
+    </v-ons-modal>
 </v-ons-page>
 </template>
 <script>
@@ -237,6 +244,7 @@ export default {
       }],
       newQty: '',
       isProcessing: false,
+      modalVisible: false,
       initializeURL: apiDomain + `/stockins/create`,
       storeURL: apiDomain + `/stockins`,
       action: 'Create'
@@ -311,6 +319,7 @@ export default {
     },
     save() {
       // this.form.month_id = this.month.id
+      this.modalVisible = true
       const form = toMulipartedForm(this.form, this.meta)
       post(this.storeURL, form)
           .then((res) => {

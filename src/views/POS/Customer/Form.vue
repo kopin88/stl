@@ -97,6 +97,13 @@
           </v-ons-list-item> -->
         </v-ons-list>
     </v-ons-card>
+    <v-ons-modal
+      :visible="modalVisible"
+    >
+      <p style="text-align: center">
+        <v-ons-progress-circular indeterminate></v-ons-progress-circular>
+      </p>
+    </v-ons-modal>
 </v-ons-page>
 </template>
 <script>
@@ -116,7 +123,8 @@ export default {
       error: {},
       isProcessing: false,
       storeURL: apiDomain + `/customers`,
-      action: 'Create'
+      action: 'Create',
+      modalVisible: false
     }
   },
   methods: {
@@ -127,6 +135,7 @@ export default {
     },
     save() {
       this.isProcessing = true
+      this.modalVisible = true
       const form = toMulipartedForm(this.form, 'create')
       post(this.storeURL, form)
         .then((res) => {

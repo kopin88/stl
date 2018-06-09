@@ -42,7 +42,7 @@
 .image__upload {
 				 height: 200px;
 				 /* width: 125px; */
-         width: 200px;
+         width: auto;
 				 background: #fafafa;
 				 border: 1px dashed  rgba(0,0,0,.1);
 				 display: flex;

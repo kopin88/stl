@@ -101,6 +101,14 @@
           </v-ons-list-item>
         </v-ons-list>
     </v-ons-card>
+
+    <v-ons-modal
+      :visible="modalVisible"
+    >
+      <p style="text-align: center">
+        <v-ons-progress-circular indeterminate></v-ons-progress-circular>
+      </p>
+    </v-ons-modal>
 </v-ons-page>
 </template>
 <script>
@@ -117,6 +125,7 @@ export default {
     return {
       error: {},
       isProcessing: false,
+      modalVisible: false,
       forderPath:'customers/'
     }
   },
@@ -133,6 +142,7 @@ export default {
     },
     save() {
       this.isProcessing = true
+      this.modalVisible = true
       const form = toMulipartedForm(this.form, 'edit')
       post(this.storeURL, form)
         .then((res) => {
