@@ -62,7 +62,7 @@ export default {
                   // remove token
                   Auth.remove()
                   // Flash.setSuccess('You have successfully logged out.')
-                  this.$router.back()
+                  // this.$router.back()
               }
           })
     }

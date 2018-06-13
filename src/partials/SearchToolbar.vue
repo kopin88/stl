@@ -1,5 +1,5 @@
 <template>
-  <v-ons-toolbar>
+  <v-ons-toolbar style="backgroundColor:#43A047">
     <div class="left">
       <slot name="left">
         <v-ons-back-button v-if="backLabel">
@@ -7,8 +7,8 @@
         </v-ons-back-button>
       </slot>
     </div>
-    <div class="center"><slot><slot name="center"></slot></slot></div>
-    <div class="right"><slot name="right"></slot></div>
+    <div class="center" style="color:white"><slot name="center"></slot></div>
+    <div class="right" style="text-align:center"><slot name="right"></slot></div>
   </v-ons-toolbar>
 </template>
 
@@ -20,7 +20,6 @@ export default {
 
 <style>
   .back-button--material__icon {
-    fill:#343a40;
-    /* fill:#28a745; */
+    fill:#ffffff;
   }
 </style>

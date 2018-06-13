@@ -2,7 +2,7 @@
 <v-ons-page>
     <custom-toolbar backLabel="Anim" :title="title">
       <template slot="right">
-        <v-ons-icon style="color:white" icon="md-search" @click="searchItem"></v-ons-icon>
+        <v-ons-icon style="color:white" icon="md-search" @click="searchItem(animation)"></v-ons-icon>
       </template>
     </custom-toolbar>
 
@@ -131,7 +131,7 @@
               }
             });
           },
-          CreateItem(name) {
+          CreateItem() {
             this.$store.commit('navigator/options', {
               // Sets animations
               animation: name,
@@ -162,7 +162,7 @@
               extends: ItemSearch,
               data() {
                 return {
-                  animation: name,
+                  animation: 'none',
                   title: "",
                 }
               }

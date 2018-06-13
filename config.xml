@@ -22,7 +22,7 @@
     <preference name="monaca:DisableCookie" value="false" />
     <preference name="monaca:AndroidIsPackageNameSeparate" value="false" />
     <feature name="App">
-        <param name="android-package" value="org.apache.cordova.App" />
+        <param name="android-package" value="com.wanyumm.stl.App" />
     </feature>
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="AutoHideSplashScreen" value="true" />

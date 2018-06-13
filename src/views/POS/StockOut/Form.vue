@@ -26,7 +26,7 @@
             </div>
             <div class="center">
               <select style="width: 100%" v-model="selectYear" class="form-control">
-                <option value="" disabled selected>ဘ႑ာေရးႏွစ္ ေရြးပါ</option>
+                <option value="" disabled selected>ခုႏွစ္ ေရြးပါ</option>
                 <option v-for="year in years" :value="year.id" :selected="form.year_id">
 									{{year.name}}
 								</option>
@@ -42,7 +42,7 @@
             <div class="center">
               <select style="width: 100%" v-model="form.month_id" class="form-control">
                 <option value="" disabled selected><label>လ ေရြးပါ ...</label></option>
-								<option value="" disabled><label>ဘ႑ာေရးႏွစ္ အရင္ေရြးပါ ... </label></option>
+								<option value="" disabled><label>ခုႏွစ္ အရင္ေရြးပါ ... </label></option>
 								<option v-for="month in months" :value="month.id">
 									{{month.name}}
 								</option>
@@ -78,16 +78,24 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-if="newItem.name != null"></v-ons-icon>
+              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-if="newItem.name != ''"></v-ons-icon>
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-else></v-ons-icon>
             </div>
             <div class="center">
                 <multiselect v-model="newItem" style="width:100%" placeholder="Select Item" label="name" track-by="id" :options="option.items" :option-height="104" :custom-label="ItemSelect" :show-labels="false">
                   <template slot="option" slot-scope="props">
                     <div class="row">
-                      <div class="option__desc col-xs-8">
-                        <strong class="option__title">{{ props.option.name }}</strong>
-                      </div>
+                      <v-ons-row>
+                        <v-ons-col width="10%"></v-ons-col>
+                        <v-ons-col width="40%">
+                          <span style="color:#ddd">Name</span><br>
+                          {{ props.option.name }}
+                        </v-ons-col>
+                        <v-ons-col width="50%">
+                          <span style="color:#ddd">Code</span><br>
+                          {{ props.option.code }}
+                        </v-ons-col>
+                      </v-ons-row>
                     </div>
                   </template>
                 </multiselect>
@@ -96,13 +104,13 @@
             </div>
           </v-ons-list-item>
 
-          <v-ons-list-item v-show="newItem.name != null">
+          <v-ons-list-item v-if="newItem.name != ''">
             <div class="left">
               <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-if="newQty != ''"></v-ons-icon>
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-else></v-ons-icon>
             </div>
             <label class="center">
-              <v-ons-input type="number" float placeholder="kg" v-model="newQty" style="width:80%">
+              <v-ons-input type="number" float placeholder="qty" v-model="newQty" style="width:80%">
               </v-ons-input>
             </label>
             <label class="right">
@@ -120,7 +128,7 @@
                     <th class="text-right">#</th>
                     <th class="text-center">SelectedItemName</th>
                     <th class="text-center">UnitPrice</th>
-                    <th class="text-center">Kg</th>
+                    <th class="text-center">QTY</th>
                     <th class="text-center">Total</th>
                     <th class="text-center"></th>
                   </tr>
@@ -303,7 +311,7 @@ export default {
         })
     },
     ItemSelect ({ name, code, brand_id, type_id, buy_price}) {
-        return `${name}`
+        return `${[code, name]}`
     },
     addItem() {
             this.form.itemouts.push({

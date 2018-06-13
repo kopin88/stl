@@ -140,9 +140,7 @@ export default {
   display: block;
   max-width: 100%;
 }
-</style>
 
-<style>
 .page--material__background.page--white__background {
   background-color: #fff;
 }

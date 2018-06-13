@@ -9,6 +9,7 @@ export const imgUrl = 'http://stl.wanyumm.com/images/'
 // for URL Update
 // views/Account/Income/Show.vue
 // views/Account/Expense/Show.vue
+// views/POS/Item/Search.vue
 
 
 export function get(url) {

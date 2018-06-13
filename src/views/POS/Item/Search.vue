@@ -1,20 +1,39 @@
 <template>
   <v-ons-page>
     <search-toolbar backLabel="Anim">
-      <div class="center">
+      <template slot="center">
         <input type="text"
-               id="search"
-               class="search"
-               placeholder=" search item .."
-               v-model="searchquery"
-               v-on:keyup="autoComplete"
-               autofocus>
-      </div>
-      <div class="right">
-      </div>
+        style="color:white"
+        id="search"
+        class="search"
+        placeholder="  Select Item"
+        v-model="searchquery"
+        v-on:keyup="autoComplete"
+        v-focus="searchfocus"
+        @focus="searchfocus = true"
+        @blur="searchfocus = false"
+        >
+      </template>
+      <template slot="right">
+
+        <!-- <v-ons-button class="sm-icon-button md-dense md-primary">
+        <md-icon>person</md-icon>
+    </v-ons-button> -->
+      <v-ons-icon  style="color:white" icon="md-close"
+        v-if="searchquery != ''"
+        @click="searchClear">
+      </v-ons-icon>
+        <v-ons-icon style="color:white" icon="md-search"
+          v-if="searchquery == ''"
+          @click="searchItem">
+        </v-ons-icon>
+      </template>
     </search-toolbar>
     <v-ons-list>
-      <v-ons-list-item v-if="items.length == 0">
+      <v-ons-list-item v-if="searchquery.length < 2">
+        Search from item 'name' or 'code' ..
+      </v-ons-list-item>
+      <v-ons-list-item v-if="(items.length == 0) && (status == 200) && (searchquery.length >= 2)">
         no item ...
       </v-ons-list-item>
 
@@ -37,13 +56,16 @@
     </v-ons-list>
   </v-ons-page>
 </template>
-<script type="text/javascript">
+<script>
 import Auth from '../../../store/auth'
 import { get, del, apiDomain, imgUrl } from '../../../helpers/api'
 import ItemEdit from './Edit.vue'
 import axios from 'axios'
 import ItemShow from './Show.vue'
+import { focus } from 'vue-focus';
+
 export default {
+  directives: { focus: focus },
   data() {
     return {
       state: 'initial',
@@ -54,7 +76,9 @@ export default {
       // isRemoving: false,
       // isProcessing: false,
       searchquery: '',
-      items: []
+      items: [],
+      status:'',
+      searchfocus: true,
     }
   },
   methods: {
@@ -64,8 +88,17 @@ export default {
          axios.get('http://stl.wanyumm.com/api/search-items',{params: {searchquery: this.searchquery}}).then(response => {
             console.log(response);
           this.items = response.data;
+          this.status = response.status;
          });
         }
+      },
+      searchClear() {
+        this.searchfocus = false;
+        this.searchquery = '';
+        this.searchfocus = true;
+      },
+      searchItem() {
+        this.searchfocus = true;
       },
       transition(name, data) {
         this.$store.commit('navigator/options', {
@@ -93,19 +126,26 @@ export default {
 </script>
 
 <style scoped>
+
 .search {
-    height: 35px;
+    float: right;
+    height: 100%;
+    width: 30px;
     box-sizing: border-box;
     border: 0px solid ;/*rgba(250,250,250,0.38);    */
     border-radius: 4px;
-    font-size: 18px;
-    color:black;
+    font-size: 20px;
+    background-color: #43A047;
+    color:white;
     background: transparent;
-    /* background-image: url(""); */
-    /* background-size: 17px; */
-    /* background-position: 1px 1px; */
-    /* background-repeat: no-repeat; */
-    /* padding: 12px 20px 12px 40px; */
+    background-image: url("");
+    /* background-image: url("../../../assets/icon/2x/search_white_18dp.png"); */
+    background-size: 22px;
+    margin: 0 4px 0 0;
+    /* line-height: 56px; */
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding: 0 12px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     z-index: -1;
@@ -113,8 +153,17 @@ export default {
 
 .search:focus {
     width: 100%;
-    border: 1px solid rgba(250,250,250,0.38);
-    background-color: white;
+    /* border: 1px solid rgba(250,250,250,0.38); */
+    background-color: #43A047;
+    /* padding: 12px 40px 12px 12px; */
+    z-index: -1;
+    margin: 0 4px 0 0;
+}
+
+::placeholder {
+  color: #C8E6C9;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 </style>
