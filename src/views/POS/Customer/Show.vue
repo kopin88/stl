@@ -7,7 +7,7 @@
       <v-ons-list-header>Detail info</v-ons-list-header>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-face" style="color: green;" class="list-item__icon"></v-ons-icon>
+          <v-ons-icon icon="md-face" class="list-item__icon text__color"></v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>
@@ -17,7 +17,7 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-check-square" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>
@@ -27,7 +27,7 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-bookmark" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-bookmark" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>
@@ -37,7 +37,7 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-smartphone" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-smartphone" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text  v-for="phone in customer.phones" :key="phone.id">
@@ -50,7 +50,7 @@
     <v-ons-list>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-plus-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-plus-square" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>
@@ -60,7 +60,7 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-email" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-email" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>
@@ -70,7 +70,7 @@
       </v-ons-list-item>
       <v-ons-list-item>
         <div class="left">
-          <v-ons-icon icon="md-pin" style="color: green;" class="list-item__icon"> </v-ons-icon>
+          <v-ons-icon icon="md-pin" class="list-item__icon text__color"> </v-ons-icon>
         </div>
         <label class="center">
           <v-ons-text>

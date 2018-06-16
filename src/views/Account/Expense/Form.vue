@@ -9,7 +9,7 @@
               <v-ons-list-header>Text input</v-ons-list-header>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-                  <v-ons-icon icon="md-calendar-check" class="list-item__icon" style="color: green;"></v-ons-icon>
+                  <v-ons-icon icon="md-calendar-check" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
 									<v-ons-input style="width: 90%" type="date" v-model="form.date">
@@ -18,7 +18,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
@@ -29,16 +29,10 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="!addOutHead">
                 <div class="left">
-									<v-ons-icon v-if="form.out_head_id != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.out_head_id != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
-                  <!-- <select class="form-control" style="width: 90%" v-model="form.out_head_id">
-										<option value="" disabled selected><label>ေငြစာရင္းေခါင္းစဥ္ ...</label></option>
-                    <option v-for="outhead in outheads" :value="outhead.id">
-                      {{ outhead.name }}
-                    </option>
-                  </select> -->
 									<select class="form-control" style="width: 90%" v-model="form.out_head_id">
 										<option value="" disabled selected><label>ေငြစာရင္းေခါင္းစဥ္ ...</label></option>
                     <option v-for="outhead in outheads" :value="outhead.id">
@@ -47,12 +41,12 @@
                   </select>
                 </label>
 								<div class="right">
-									<v-ons-icon icon="md-plus-square" class="list-item__icon" @click="newOutHead" style="color: green;"></v-ons-icon>
+									<v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon text__color" @click="newOutHead"></v-ons-icon>
 								</div>
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="addOutHead">
                 <div class="left">
-									<v-ons-icon v-if="outhead.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="outhead.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
@@ -61,12 +55,12 @@
                   </v-ons-text>
                 </label>
 								<div class="right">
-									<v-ons-icon icon="md-check-square" class="list-item__icon" @click="saveOutHead" style="color: green;"></v-ons-icon>
+									<v-ons-icon size="30px" icon="md-check-square" class="list-item__icon text__color" @click="saveOutHead"></v-ons-icon>
 								</div>
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon v-if="form.amount != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.amount != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
@@ -77,7 +71,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon v-if="form.description != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.description != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
@@ -88,7 +82,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon v-if="form.remark != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.remark != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">
@@ -99,7 +93,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon v-if="form.image != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon v-if="form.image != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                   <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                 </div>
                 <label class="center">

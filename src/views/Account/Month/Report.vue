@@ -9,7 +9,7 @@
 				<th style="width:20%">Remark</th>
 			</tr>
 			<tr>
-				<td colspan="4" class="bg-success"></td>
+				<td colspan="4" class="theme__color"></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -19,7 +19,7 @@
 				<th></th>
 			</tr>
 			<tr>
-				<td colspan="4" class="bg-success"></td>
+				<td colspan="4" class="theme__color"></td>
 			</tr>
 			<tr>
 				<th></th>
@@ -39,10 +39,10 @@
 				<th class="table-number">{{month.in_total}}</th>
 				<th class="text-center">
 					<v-ons-icon class="text-warning" icon="md-alert-circle" v-if="month.in_total != inTotal" @click="saveInTotal" :disabled="isProcessing"></v-ons-icon>
-					<v-ons-icon style="color:green;" icon="md-check-circle" v-else></v-ons-icon>
+					<v-ons-icon class="text__color" icon="md-check-circle" v-else></v-ons-icon>
 				</th>
 			</tr>
-			<tr><td colspan="4" class="bg-success"></td></tr>
+			<tr><td colspan="4" class="theme__color"></td></tr>
 			<tr>
 				<th></th>
 				<th>Expense</th>
@@ -61,10 +61,10 @@
 				<th  class="table-number">{{month.out_total}}</th>
 				<th class="text-center">
 					<v-ons-icon class="text-warning" icon="md-alert-circle"  v-if="month.out_total != outTotal" @click="saveOutTotal" :disabled="isProcessing"></v-ons-icon>
-					<v-ons-icon style="color:green;" icon="md-check-circle" v-else></v-ons-icon>
+					<v-ons-icon class="text__color" icon="md-check-circle" v-else></v-ons-icon>
 				</th>
 			</tr>
-			<tr><td colspan="4" class="bg-success"></td></tr>
+			<tr><td colspan="4" class="theme__color"></td></tr>
 			<tr>
 				<th></th>
 				<th>Balance</th>
@@ -72,7 +72,7 @@
 				<th class="table-number" v-else>{{Balance}}</th>
 				<th></th>
 			</tr>
-			<tr><td colspan="4" class="bg-success"></td></tr>
+			<tr><td colspan="4" class="theme__color"></td></tr>
 			<tr>
 				<th></th>
 				<th>Total Balance</th>
@@ -80,7 +80,7 @@
 				<th class="table-number" v-else>{{month.balance}}</th>
 				<th class="text-center">
 					<v-ons-icon class="text-warning" icon="md-alert-circle"  v-if="month.balance != balanceTotal" @click="saveBalance" :disabled="isProcessing"></v-ons-icon>
-					<v-ons-icon style="color:green;" icon="md-check-circle" v-else></v-ons-icon>
+					<v-ons-icon class="text__color" icon="md-check-circle" v-else></v-ons-icon>
 				</th>
 			</tr>
 		</tbody>

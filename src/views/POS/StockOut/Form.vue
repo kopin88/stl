@@ -11,7 +11,7 @@
           <v-ons-list-item>
             <div class="left">
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-if="form.invoice_no == ''"></v-ons-icon>
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-else></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Invoice No." v-model="form.invoice_no" style="width:100%">
@@ -22,7 +22,7 @@
           <v-ons-list-item>
             <div class="left">
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-if="selectYear == ''"></v-ons-icon>
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-else></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <div class="center">
               <select style="width: 100%" v-model="selectYear" class="form-control">
@@ -37,7 +37,7 @@
           <v-ons-list-item>
             <div class="left">
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-if="form.month_id == ''"></v-ons-icon>
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-else></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <div class="center">
               <select style="width: 100%" v-model="form.month_id" class="form-control">
@@ -53,7 +53,7 @@
           <v-ons-list-item>
             <div class="left">
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-if="form.date == ''"></v-ons-icon>
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-else></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input type="date" float placeholder="ေန႔စြဲ" v-model="form.date" style="width:100%">
@@ -64,7 +64,7 @@
           <v-ons-list-item>
             <div class="left">
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-if="form.customer_id == ''"></v-ons-icon>
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-else></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <div class="center">
               <select style="width: 100%" v-model="form.customer_id" class="form-control">
@@ -78,7 +78,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-if="newItem.name != ''"></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-if="newItem.name != ''"></v-ons-icon>
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-else></v-ons-icon>
             </div>
             <div class="center">
@@ -106,7 +106,7 @@
 
           <v-ons-list-item v-if="newItem.name != ''">
             <div class="left">
-              <v-ons-icon icon="md-check" style="color: green;" class="list-item__icon" v-if="newQty != ''"></v-ons-icon>
+              <v-ons-icon icon="md-check" class="list-item__icon text__color" v-if="newQty != ''"></v-ons-icon>
               <v-ons-icon icon="md-minus-circle-outline" style="color: #FB8C00;" class="list-item__icon" v-else></v-ons-icon>
             </div>
             <label class="center">
@@ -115,7 +115,7 @@
             </label>
             <label class="right">
               <v-ons-text v-show="newQty != ''" @click.stop="addItem">
-                <v-ons-icon icon="md-plus-circle" style="color:green" class="list-item__icon"> </v-ons-icon>
+                <v-ons-icon size="30px" icon="md-plus-circle" class="list-item__icon text__color"> </v-ons-icon>
               </v-ons-text>
             </label>
           </v-ons-list-item>
@@ -171,9 +171,9 @@
                     </td>
                     <td>
                       <v-ons-text @click="remBalance = !remBalance">
-                        <v-ons-icon icon="md-edit" style="color:green" class="list-item__icon" v-if="!remBalance"> </v-ons-icon>
+                        <v-ons-icon icon="md-edit" class="list-item__icon text__color" v-if="!remBalance"> </v-ons-icon>
 
-                        <v-ons-icon icon="md-check" style="color:green" class="list-item__icon"  v-if="remBalance"> </v-ons-icon>
+                        <v-ons-icon icon="md-check" class="list-item__icon text__color"  v-if="remBalance"> </v-ons-icon>
                       </v-ons-text>
                     </td>
                   </tr>
@@ -187,9 +187,9 @@
                     </td>
                     <td>
                       <v-ons-text @click="discount = !discount">
-                        <v-ons-icon icon="md-edit" style="color:green" class="list-item__icon" v-if="!discount"> </v-ons-icon>
+                        <v-ons-icon icon="md-edit" class="list-item__icon text__color" v-if="!discount"> </v-ons-icon>
 
-                        <v-ons-icon icon="md-check" style="color:green" class="list-item__icon"  v-if="discount"> </v-ons-icon>
+                        <v-ons-icon icon="md-check" class="list-item__icon text__color"  v-if="discount"> </v-ons-icon>
                       </v-ons-text>
                     </td>
                   </tr>

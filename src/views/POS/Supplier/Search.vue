@@ -6,7 +6,7 @@
         style="color:white"
         id="search"
         class="search"
-        placeholder="  Select Item"
+        placeholder="  Select Supplier"
         v-model="searchquery"
         v-on:keyup="autoComplete"
         v-focus="searchfocus"
@@ -25,7 +25,7 @@
       </v-ons-icon>
         <v-ons-icon style="color:white" icon="md-search"
           v-if="searchquery == ''"
-          @click="searchItem">
+          @click="searchSupplier">
         </v-ons-icon>
       </template>
     </search-toolbar>
@@ -33,24 +33,24 @@
       <v-ons-list-item v-if="searchquery.length < 2">
         Search from item 'name' or 'code' ..
       </v-ons-list-item>
-      <v-ons-list-item v-if="(items.length == 0) && (status == 200) && (searchquery.length >= 2)">
+      <v-ons-list-item v-if="(suppliers.length == 0) && (status == 200) && (searchquery.length >= 2)">
         no item ...
       </v-ons-list-item>
 
-      <v-ons-list-item v-else v-for="item in items" :key="item.id"
-          @click="transition(animation, item)"
+      <v-ons-list-item v-else v-for="supplier in suppliers" :key="supplier.id"
+          @click="transition(animation, supplier)"
           modifier="chevron"
           class="list-item-container">
       <div class="left">
-        <img class="list-item__thumbnail" :src="imgLink + item.image" >
+        <img class="list-item__thumbnail" :src="imgLink + supplier.image" >
       </div>
       <div class="center">
-        <span class="list-item__title">{{ item.name }}</span>
-        <span class="list-item__subtitle">code : {{ item.code }}</span>
-        <span class="list-item__subtitle">price : {{ item.sale_price }}</span>
+        <span class="list-item__title">{{ supplier.name }}</span>
+        <span class="list-item__subtitle">code : {{ supplier.code }}</span>
+        <!-- <span class="list-item__subtitle">price : {{ supplier.sale_price }}</span> -->
       </div>
       <div class="right">
-        {{item.qty_total}}
+        {{supplier.rem_balance}}
       </div>
       </v-ons-list-item>
     </v-ons-list>
@@ -59,9 +59,8 @@
 <script>
 import Auth from '../../../store/auth'
 import { get, del, apiDomain, imgUrl } from '../../../helpers/api'
-import ItemEdit from './Edit.vue'
 import axios from 'axios'
-import ItemShow from './Show.vue'
+import SupplierShow from './Show.vue'
 import { focus } from 'vue-focus';
 
 export default {
@@ -71,23 +70,23 @@ export default {
       state: 'initial',
       ratio: 0,
       animation: 'default',
-      imgLink: imgUrl + 'items/',
+      imgLink: imgUrl + 'suppliers/',
       // authState: Auth.state,
       // isRemoving: false,
       // isProcessing: false,
       searchquery: '',
-      items: [],
+      suppliers: [],
       status:'',
       searchfocus: true,
     }
   },
   methods: {
     autoComplete(){
-        this.items = [];
+        this.suppliers = [];
         if(this.searchquery.length >= 2){
-         axios.get('http://stl.wanyumm.com/api/search-items',{params: {searchquery: this.searchquery}}).then(response => {
+         axios.get('http://stl.wanyumm.com/api/search-suppliers',{params: {searchquery: this.searchquery}}).then(response => {
             console.log(response);
-          this.items = response.data;
+          this.suppliers = response.data;
           this.status = response.status;
          });
         }
@@ -97,24 +96,24 @@ export default {
         this.searchquery = '';
         this.searchfocus = true;
       },
-      searchItem() {
+      searchSupplier() {
         this.searchfocus = true;
       },
       transition(name, data) {
         this.$store.commit('navigator/options', {
           // Sets animations
           animation: name,
-          item: data,
+          supplier: data,
           // Resets default options
           callback: () => this.$store.commit('navigator/options', {})
         });
 
         this.$store.commit('navigator/replace', {
-          extends: ItemShow,
+          extends: SupplierShow,
           data() {
             return {
               animation: name,
-              item: data,
+              supplier: data,
               title: data.name,
             }
           }
@@ -124,47 +123,3 @@ export default {
   }
 }
 </script>
-
-<!-- /* <style scoped>
-
-.search {
-    float: right;
-    height: 100%;
-    width: 30px;
-    box-sizing: border-box;
-    border: 0px solid ;
-    rgba(250,250,250,0.38);
-    border-radius: 4px;
-    color:white;
-    font-size: 20px;
-    background-color: $theme-color;
-    background: transparent;
-    background-image: url("");
-    background-image: url("../../../assets/icon/2x/search_white_18dp.png");
-    background-size: 22px;
-    margin: 0 4px 0 0;
-    line-height: 56px;
-    background-position: right center;
-    background-repeat: no-repeat;
-    padding: 0 12px;
-    -webkit-transition: width 0.4s ease-in-out;
-    z-index: -1;
-    transition: width 0.4s ease-in-out;
-}
-
-.search:focus {
-    width: 100%;
-    border: 1px solid rgba(250,250,250,0.38);
-    background-color: $theme-color;
-    padding: 12px 40px 12px 12px;
-    z-index: -1;
-    margin: 0 4px 0 0;
-}
-
-::placeholder {
-  color: #C8E6C9;
-  font-size: 20px;
-  font-weight: 500;
-}
-
-</style> */ -->

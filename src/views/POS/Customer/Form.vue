@@ -1,7 +1,7 @@
 <template>
 <v-ons-page>
     <custom-toolbar backLabel="Anim" :title="title">
-      <template slot="right">
+      <template slot="right" v-if="(form.name != '') && (form.code != '') && (form.image != '')">
         <v-ons-icon style="color:white" icon="md-check" :disabled="isProcessing" @click="save"></v-ons-icon>
       </template>
     </custom-toolbar>
@@ -12,7 +12,7 @@
           <v-ons-list-header>Detail info</v-ons-list-header>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-face" style="color: green;" class="list-item__icon"></v-ons-icon>
+              <v-ons-icon icon="md-face" class="list-item__icon text__color"></v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Name" v-model="form.name" style="width:100%">
@@ -22,7 +22,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-check-square" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Code" v-model="form.code" style="width:100%">
@@ -32,7 +32,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-bookmark" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-bookmark" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="NRC" v-model="form.nrc" style="width:100%">
@@ -42,7 +42,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-smartphone" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-smartphone" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center" v-for="(phone, index) in form.phones">
               <v-ons-input float placeholder="Phone" v-model="phone.phone" style="width:100%">
@@ -61,7 +61,7 @@
         <v-ons-list>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-plus-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-plus-square" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Company" v-model="form.company" style="width:100%">
@@ -71,7 +71,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-email" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-email" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Email" v-model="form.email" style="width:100%">
@@ -81,7 +81,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-pin" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-pin" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Address" v-model="form.address" type="textarea" style="width:100%">
@@ -117,6 +117,9 @@ export default {
   data() {
     return {
       form: {
+        name: '',
+        code: '',
+        image: '',
         phones: [{"phone":""}]
       },
       imgLink: imgUrl + 'images/customers/',

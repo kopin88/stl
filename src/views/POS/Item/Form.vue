@@ -12,7 +12,7 @@
 
           <v-ons-list-item :modifier="md ? 'nodivider' : ''">
             <div class="left">
-              <v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -23,7 +23,7 @@
           </v-ons-list-item>
           <v-ons-list-item :modifier="md ? 'nodivider' : ''">
             <div class="left">
-              <v-ons-icon v-if="form.code != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="form.code != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -35,7 +35,7 @@
 
           <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="!addType">
             <div class="left">
-              <v-ons-icon v-if="form.type_id != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="form.type_id != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -48,12 +48,12 @@
             </label>
             <div class="right">
               <!-- <ion-icon name="add-circle"></ion-icon> -->
-              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon" @click="newType" style="color: green;"></v-ons-icon>
+              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon text__color" @click="newType"></v-ons-icon>
             </div>
           </v-ons-list-item>
           <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="addType">
             <div class="left">
-              <v-ons-icon v-if="type.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="type.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -62,13 +62,13 @@
               </v-ons-text>
             </label>
             <div class="right">
-              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon" @click="saveType" :disabled="isProcessingType" style="color: green;"></v-ons-icon>
+              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon text__color" @click="saveType" :disabled="isProcessingType"></v-ons-icon>
             </div>
           </v-ons-list-item>
 
           <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="!addBrand">
             <div class="left">
-              <v-ons-icon v-if="form.brand_id != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="form.brand_id != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -80,12 +80,12 @@
               </select>
             </label>
             <div class="right">
-              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon" @click="newBrand" style="color: green;"></v-ons-icon>
+              <v-ons-icon size="30px" icon="md-plus-square" class="list-item__icon text__color" @click="newBrand"></v-ons-icon>
             </div>
           </v-ons-list-item>
           <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-show="addBrand">
             <div class="left">
-              <v-ons-icon v-if="brand.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="brand.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">
@@ -94,12 +94,12 @@
               </v-ons-text>
             </label>
             <div class="right">
-              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon" :disabled="isProcessingBrand" @click="saveBrand" style="color: green;"></v-ons-icon>
+              <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon text__color" :disabled="isProcessingBrand" @click="saveBrand"></v-ons-icon>
             </div>
           </v-ons-list-item>
           <v-ons-list-item :modifier="md ? 'nodivider' : ''">
             <div class="left">
-              <v-ons-icon v-if="form.descriptions != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+              <v-ons-icon v-if="form.descriptions != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
               <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
             </div>
             <label class="center">

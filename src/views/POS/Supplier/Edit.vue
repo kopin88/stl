@@ -1,6 +1,10 @@
 <template>
 <v-ons-page>
-  <custom-toolbar backLabel="Anim" :title="title"></custom-toolbar>
+  <custom-toolbar backLabel="Anim" :title="title">
+    <template slot="right" v-if="(form.name != '') && (form.code != '') && (form.image != null)">
+      <v-ons-icon style="color:white" icon="md-check" :disabled="isProcessing" @click="save"></v-ons-icon>
+    </template>
+  </custom-toolbar>
     <v-ons-card>
       <image-upload v-model="form.image" :forderPath="forderPath"></image-upload>
       <v-ons-text class="text__danger" v-if="error.image">{{"ပံု ထည့္ပါ"}}</v-ons-text>
@@ -8,7 +12,7 @@
           <v-ons-list-header>Detail info</v-ons-list-header>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-face" style="color: green;" class="list-item__icon"></v-ons-icon>
+              <v-ons-icon icon="md-face" class="list-item__icon text__color"></v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Name" v-model="form.name" style="width:100%">
@@ -18,7 +22,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-check-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-check-square" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Code" v-model="form.code" style="width:100%">
@@ -28,7 +32,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-bookmark" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-bookmark" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="NRC" v-model="form.nrc" style="width:100%">
@@ -38,7 +42,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-smartphone" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-smartphone" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center" v-for="(phone, index) in form.phones">
               <v-ons-input float placeholder="Phone" v-model="phone.phone" style="width:100%">
@@ -57,7 +61,7 @@
         <v-ons-list>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-plus-square" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-plus-square" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Company" v-model="form.company" style="width:100%">
@@ -67,7 +71,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-email" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-email" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Email" v-model="form.email" style="width:100%">
@@ -77,7 +81,7 @@
           </v-ons-list-item>
           <v-ons-list-item>
             <div class="left">
-              <v-ons-icon icon="md-pin" style="color: green;" class="list-item__icon"> </v-ons-icon>
+              <v-ons-icon icon="md-pin" class="list-item__icon text__color"> </v-ons-icon>
             </div>
             <label class="center">
               <v-ons-input float placeholder="Address" v-model="form.address" type="textarea" style="width:100%">
@@ -91,14 +95,6 @@
               <v-ons-text class="text__danger" v-if="error.image">{{"ပံု ထည့္ပါ"}}</v-ons-text>
             </div>
           </v-ons-list-item> -->
-          <v-ons-list-item>
-            <div class="center">
-              <v-ons-button @click="$router.back()" :disabled="isProcessing">Cancel</v-ons-button>
-            </div>
-            <div class="right">
-              <v-ons-button @click="save" :disabled="isProcessing">Save</v-ons-button>
-            </div>
-          </v-ons-list-item>
         </v-ons-list>
     </v-ons-card>
     <v-ons-modal
@@ -125,14 +121,15 @@ export default {
       error: {},
       isProcessing: false,
       modalVisible: false,
-      forderPath:'suppliers/'
+      forderPath:'suppliers/',
+      action: 'Update'
     }
   },
-  created() {
-    this.initializeURL = apiDomain + `/suppliers/${this.form.id}/edit`
-    this.storeURL = apiDomain + `/suppliers/${this.form.id}?_method=PUT`
-    this.action = 'Update'
-  },
+  // created() {
+  //   this.initializeURL = apiDomain + `/suppliers/${this.form.id}/edit`
+  //   this.storeURL = apiDomain + `/suppliers/${this.form.id}?_method=PUT`
+  //   this.action = 'Update'
+  // },
   methods: {
     addPhone() {
       this.form.phones.push({
@@ -140,13 +137,22 @@ export default {
       })
     },
     save() {
-      this.isProcessing = true
       this.modalVisible = true
+      this.isProcessing = true
       const form = toMulipartedForm(this.form, 'edit')
-      post(this.storeURL, form)
+      post(apiDomain + `/suppliers/${this.form.id}?_method=PUT`, form)
         .then((res) => {
           if (res.data.saved) {
-            this.$store.commit('navigator/pop');
+            this.$store.commit('navigator/pop', {
+              extends: SupplierShow,
+              data() {
+                return {
+                  supplier: res.data.supplier,
+                  title: res.data.supplier.name,
+                  // reportsource: `items/${res.data.item.year_id}/reports/${res.data.item.id}`
+                }
+              }
+            })
           }
           this.isProcessing = false
         })

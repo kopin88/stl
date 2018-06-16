@@ -10,7 +10,7 @@
 						<th>Remark</th>
 					</tr>
 					<tr>
-						<td colspan="4" class="bg-success"></td>
+						<td colspan="4" class="bg__color"></td>
 					</tr>
 					<tr>
 						<th></th>
@@ -19,7 +19,7 @@
 						<th></th>
 					</tr>
 					<tr>
-						<td colspan="4" class="bg-success"></td>
+						<td colspan="4" class="bg__color"></td>
 					</tr>
 					<tr>
 						<th></th>
@@ -40,7 +40,7 @@
 						<th class="text-center">
 						</th>
 					</tr>
-					<tr><td colspan="4" class="bg-success"></td></tr>
+					<tr><td colspan="4" class="bg__color"></td></tr>
 					<tr>
 						<th></th>
 						<th>Expense</th>
@@ -60,14 +60,14 @@
 						<th class="text-center">
 						</th>
 					</tr>
-					<tr><td colspan="4" class="bg-success"></td></tr>
+					<tr><td colspan="4" class="bg__color"></td></tr>
 					<tr>
 						<th></th>
 						<th>Balance</th>
 						<th class="table-number" >{{Balance}}</th>
 						<th></th>
 					</tr>
-					<tr><td colspan="4" class="bg-success"></td></tr>
+					<tr><td colspan="4" class="bg__color"></td></tr>
 					<tr>
 						<th></th>
 						<th>Total Balance</th>

@@ -1,7 +1,7 @@
 <template>
   <v-ons-card>
     <v-ons-row width="100%">
-      <v-ons-col class="text-center" width="15%">
+      <v-ons-col class="text-center text-line" width="15%">
           Show
       </v-ons-col>
       <v-ons-col width="20%">
@@ -11,16 +11,16 @@
           <option value="50">50</option>
         </select>
       </v-ons-col>
-      <v-ons-col class="text-center" width="20%">
+      <v-ons-col class="text-center text-line" width="20%">
         entries
       </v-ons-col>
       <v-ons-col width="5%">
       </v-ons-col>
       <v-ons-col width="20%">
-        <button @click="prev" class="btn btn-success btn-round btn-sm">Prev</button>
+        <v-ons-button modifier="cta" @click="prev" class="v-button">Prev</v-ons-button>
       </v-ons-col>
       <v-ons-col width="20%">
-        <button @click="next" class="btn btn-success btn-round btn-sm">Next</button>
+        <v-ons-button modifier="cta" @click="next" class="v-button">Next</v-ons-button>
       </v-ons-col>
     </v-ons-row>
     <v-ons-row style="margin-top:20px">

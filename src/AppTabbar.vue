@@ -49,7 +49,6 @@ const red = [244, 67, 54];
 const blue = [30, 136, 229];
 const green = [67, 160, 71];
 const purple = [103, 58, 183];
-
 export default {
   data () {
     return {
@@ -63,31 +62,31 @@ export default {
         //   label: 'Home',
         //   icon: this.md ? null : 'ion-home',
         //   page: Home,
-        //   theme: green
+        //   theme: blue
         // },
         {
           label: 'ကုန္ပစၥည္း စာရင္း',
           icon: this.md ? null : 'ion-plus',
           page: POS,
-          theme: green
+          theme: blue
         },
         {
           label: 'ေငြစာရင္း',
           icon: this.md ? null : 'ion-edit',
           page: Account,
-          theme: green
+          theme: blue
         },
         {
           label: 'လုပ္ေဆာင္ရန္',
           icon: this.md ? null : 'ion-flag',
           page: Action,
-          theme: green
+          theme: blue
         },
         // {
         //   label: this.md ? null : 'Camera',
         //   icon: 'ion-camera, material:md-camera',
         //   page: Camera,
-        //   theme: green,
+        //   theme: blue,
         //   style: this.md ? { maxWidth: '60px' } : {},
         //   top: -105 // Toolbar + Tabbar heights
         // }

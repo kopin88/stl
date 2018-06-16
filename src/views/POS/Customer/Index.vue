@@ -1,6 +1,9 @@
 <template>
 <v-ons-page>
     <custom-toolbar backLabel="Anim" :title="title">
+      <template slot="right">
+        <v-ons-icon style="color:white" icon="md-search" @click="searchCustomer(animation)"></v-ons-icon>
+      </template>
     </custom-toolbar>
 
     <v-ons-pull-hook
@@ -30,21 +33,31 @@
       </div>
 
     </v-ons-pull-hook>
-
-  <v-ons-list>
-    <v-ons-list-item v-for="customer in customers" :key="customer.id" @click="transition(animation, customer)" modifier="chevron" class="list-item-container">
-      <div class="left">
-        <img class="list-item__thumbnail" :src="imgLink + customer.image">
-      </div>
-      <div class="center">
-        <span class="list-item__title">{{ customer.name }}</span><span class="list-item__subtitle">{{ customer.code }}</span>
-      </div>
-      <div class="right">
-        {{customer.qty_total}}
-      </div>
-    </v-ons-list-item>
-  </v-ons-list>
-  <v-ons-fab position="bottom right" animation="default" @click="CreateCustomer(animation)">
+    <item-viewer
+      :source="source"
+      :thead="thead"
+      :filter="filter"
+      :create="create"
+      :title="title">
+      <template slot-scope="props">
+        <v-ons-list>
+          <v-ons-list-item :action="onAction" :key="props.item.id" @click="transition(animation, props.item)" modifier="chevron" class="list-item-container">
+            <div class="left">
+              <img class="list-item__thumbnail" :src="imgLink + props.item.image" />
+            </div>
+            <div class="center">
+              <span class="list-item__title">{{ props.item.name }}</span>
+              <span class="list-item__subtitle">code : {{ props.item.code }}</span>
+              <!-- <span class="list-item__subtitle">price : {{ props.item.sale_price }}</span> -->
+            </div>
+            <div class="right">
+              {{props.item.rem_balance}}
+            </div>
+          </v-ons-list-item>
+        </v-ons-list>
+      </template>
+    </item-viewer>
+  <v-ons-fab position="bottom right" @click="CreateCustomer(animation)">
     <v-ons-icon icon="md-plus"></v-ons-icon>
   </v-ons-fab>
 </v-ons-page>
@@ -53,16 +66,34 @@
 
 <script>
     import CustomerShow from './Show.vue'
+    import CustomerSearch from './Search.vue'
     import CustomerForm from './Form.vue'
+    import ItemViewer from '../../../components/ItemViewer.vue'
     import {apiDomain, imgUrl} from '../../../helpers/api'
 
     export default {
+        components: {ItemViewer},
         data() {
             return {
                 state: 'initial',
                 ratio: 0,
                 animation: 'default',
+
+                // items: ''
+                title: 'Customer List',
                 imgLink: imgUrl + 'customers/',
+                source: apiDomain + '/customers',
+                create: apiDomain + '/customers/create',
+                thead: [
+                    {title: 'Image', key: 'image', sort: false},
+                    {title: 'Name', key: 'name', sort: true},
+                    {title: 'Code', key: 'code', sort: true},
+                    // {title: 'Price', key: 'sale_price', sort: true},
+                    {title: 'Remaining', key: 'rem_balance', sort: true}
+                ],
+                filter: [
+                  'code', 'name', 'rem_balance'
+                ]
             }
         },
         methods: {
@@ -71,7 +102,7 @@
           },
           onAction(done) {
             setTimeout(() => {
-              this.customers = [...this.customers];
+              this.items = [...this.items];
               done();
             }, 1500);
           },
@@ -95,7 +126,7 @@
               }
             });
           },
-          CreateCustomer(name) {
+          CreateCustomer() {
             this.$store.commit('navigator/options', {
               // Sets animations
               animation: name,
@@ -108,7 +139,26 @@
               data() {
                 return {
                   animation: name,
-                  title: "Create Customer",
+                  title: "New Customer",
+                  meta: "create"
+                }
+              }
+            });
+          },
+          searchCustomer(name) {
+            this.$store.commit('navigator/options', {
+              // Sets animations
+              animation: name,
+              // Resets default options
+              callback: () => this.$store.commit('navigator/options', {})
+            });
+
+            this.$store.commit('navigator/push', {
+              extends: CustomerSearch,
+              data() {
+                return {
+                  animation: 'none',
+                  title: "",
                 }
               }
             });

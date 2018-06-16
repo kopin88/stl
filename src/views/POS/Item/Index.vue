@@ -85,7 +85,7 @@
                 source: apiDomain + '/items',
                 create: apiDomain + '/items/create',
                 thead: [
-                    {title: 'Image', key: 'image', sort: false},
+                    {title: '#', key: 'image', sort: false},
                     {title: 'Name', key: 'name', sort: true},
                     {title: 'Code', key: 'code', sort: true},
                     {title: 'Price', key: 'sale_price', sort: true},
