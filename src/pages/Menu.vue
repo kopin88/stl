@@ -7,7 +7,7 @@
     <!-- <v-ons-list-title>Access</v-ons-list-title> -->
     <v-ons-list>
       <v-ons-list-item v-for="(item, index) in access"
-        style="color:blue"
+        class="text__color"
         :key="item.title"
         :modifier="md && 'nodivider'"
         @click="loadView(index)"
@@ -29,7 +29,7 @@
       <v-ons-list-item
         v-if="authState.api_token && authState.user_id === 1"
         v-for="page of pages"
-        style="color:blue"
+        class="text__color"
         :key="page.title"
         @click="push(page.component, page.title)"
         :modifier="md && 'nodivider'"
@@ -45,7 +45,7 @@
         </div>
       </v-ons-list-item>
       <v-ons-list-item @click="logout"
-        style="color:blue"
+        class="text__color"
         :modifier="md && 'nodivider'">
         <div class="left">
           <v-ons-icon fixed-width class="list-item__icon" icon="ion-locked, material:md-lock"></v-ons-icon>

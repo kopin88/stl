@@ -52,10 +52,10 @@ props: ['year_id'],
         datasets: [
           {
             label: 'Inocmes',
-            borderColor: '#249EBF',
+            borderColor: '#1E88E5',
             pointBackgroundColor: 'white',
             borderWidth: 1,
-            pointBorderColor: '#249EBF',
+            pointBorderColor: '#1E88E5',
             backgroundColor: 'transparent',
             data: this.incomes
           },
