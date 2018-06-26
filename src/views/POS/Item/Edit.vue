@@ -97,6 +97,17 @@
               <v-ons-icon size="30px" icon="md-check-square" class="list-item__icon text__color" :disabled="isProcessingBrand" @click="saveBrand"></v-ons-icon>
             </div>
           </v-ons-list-item>
+          <v-ons-list-item :modifier="md ? 'nodivider' : ''" v-if="authState.user_id === 0">
+            <div class="left">
+              <v-ons-icon v-if="form.qty_total != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
+              <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
+            </div>
+            <label class="center">
+              <v-ons-input type="text" placeholder="total 'qty'" v-model="form.qty_total" float style="width:90%;font-family:Zawgyi-One;"> </v-ons-input>
+              <v-ons-text class="text__danger" v-if="error.qty_total">{{ error.qty_total[0] }}
+              </v-ons-text>
+            </label>
+          </v-ons-list-item>
           <v-ons-list-item :modifier="md ? 'nodivider' : ''">
             <div class="left">
               <v-ons-icon v-if="form.descriptions != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
@@ -125,6 +136,7 @@
 </template>
 <script>
 import Vue from 'vue'
+import Auth from '../../../store/auth'
 import { get, post, apiDomain, imgUrl} from '../../../helpers/api'
 import { toMulipartedForm } from '../../../helpers/form'
 import ImageUpload from '../../../components/ImageUpload.vue'
@@ -136,7 +148,7 @@ export default {
   components: { ImageUpload },
   data() {
     return {
-      // title: 'Create Item',
+      authState: Auth.state,
       addType: false,
       addBrand: false,
       typefocus: false,

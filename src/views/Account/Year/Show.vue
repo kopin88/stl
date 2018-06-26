@@ -42,6 +42,7 @@
 		                  <th class="text-center">၀င္ေငြ</th>
 		                  <th class="text-center">အသံုးစရိတ္</th>
 		                  <th class="text-center">လက္က်န္</th>
+		                  <th class="text-center">မွတ္ခ်က္</th>
 		                </tr>
 		              </thead>
 		              <tbody>
@@ -52,8 +53,25 @@
 		                  <td class="text-right"><v-ons-text>{{ month.in_total }}</v-ons-text></td>
 		                  <td class="text-right"><v-ons-text>{{ month.out_total }}</v-ons-text></td>
 		                  <td class="text-right"><v-ons-text>{{ month.balance }}</v-ons-text></td>
+		                  <td></td>
 		                </tr>
 		              </tbody>
+                  <tfoot>
+      							<tr>
+      								<th></th>
+      								<th>Total</th>
+      								<th class="table-number text-warning" v-if="year.open_balance != OpenBalance">{{ year.open_balance }}</th>
+      								<th class="table-number" v-else>{{year.open_balance}}</th>
+      								<th class="table-number">{{ inTotal }}</th>
+      								<th class="table-number">{{ outTotal }}</th>
+      								<th class="table-number text-warning" v-if="year.balance != Balance">{{ year.balance }}</th>
+      								<th class="table-number" v-else>{{year.balance}}</th>
+      								<th class="text-center">
+      									<v-ons-icon class="text-warning" icon="md-alert-circle"  v-if="year.balance != Balance" @click="saveBalance" :disabled="isProcessing"></v-ons-icon>
+              					<v-ons-icon class="text__color" icon="md-check-circle" v-else></v-ons-icon>
+              				</th>
+      							</tr>
+      						</tfoot>
 		            </table>
 		          </div>
 		    	</v-ons-row>
@@ -233,8 +251,8 @@
 								this.isProcessingYear = false
 						})
 						.catch((err) => {
-								if(err.response.status === 422) {
-										this.error = err.response.data
+								if(err.status === 422) {
+										this.error = err.data
 								}
 								this.isProcessingYear = false
 						})
@@ -251,8 +269,8 @@
 					        this.isProcessing = false
 					    })
 					    .catch((err) => {
-					        if(err.response.status === 422) {
-					            this.error = err.response.data
+					        if(err.status === 422) {
+					            this.error = err.data
 					        }
 					        this.isProcessing = false
 					    })
@@ -272,8 +290,8 @@
 				        this.isProcessing = false
 				    })
 				    .catch((err) => {
-				        if(err.response.status === 422) {
-				            this.error = err.response.data
+				        if(err.status === 422) {
+				            this.error = err.data
 				        }
 				        this.isProcessing = false
 				    })

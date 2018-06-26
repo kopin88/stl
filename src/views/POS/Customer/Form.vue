@@ -111,6 +111,7 @@ import Vue from 'vue'
 import { get, post, apiDomain, imgUrl} from '../../../helpers/api'
 import { toMulipartedForm } from '../../../helpers/form'
 import ImageUpload from '../../../components/ImageUpload.vue'
+import CustomerShow from './Show.vue'
 
 export default {
   components: { ImageUpload },
@@ -143,7 +144,23 @@ export default {
       post(this.storeURL, form)
         .then((res) => {
           if (res.data.saved) {
-            this.$store.commit('navigator/pop');
+            this.$store.commit('navigator/options', {
+              // Sets animations
+              animation: 'default',
+              // item: data,
+              // Resets default options
+              callback: () => this.$store.commit('navigator/options', {})
+            })
+            this.$store.commit('navigator/replace', {
+              extends: CustomerShow,
+              data() {
+                return {
+                  customer: res.data.customer,
+                  title: res.data.customer.name,
+                  // reportsource: `items/${res.data.item.year_id}/reports/${res.data.item.id}`
+                }
+              }
+            })
           }
           this.isProcessing = false
         })

@@ -1,26 +1,27 @@
 <template>
   <v-ons-page>
-    <custom-toolbar backLabel="Anim" :title="title"></custom-toolbar>
     <v-ons-dialog cancelable
       class="lorem-dialog"
       :visible.sync="dialogVisible"
     >
-      <!-- Optional page. This could contain a Navigator as well. -->
       <v-ons-page>
         <v-ons-toolbar>
           <div class="left">
-            <v-ons-icon style="color:green;padding-left:10px" @click="cancel(animation)" icon="md-long-arrow-left"></v-ons-icon>
+            <v-ons-icon class="text__color" style="padding-left:10px" @click="cancel(animation)" icon="md-long-arrow-left"></v-ons-icon>
           </div>
           <div class="center">Create Financial Year</div>
           <div class="right">
-            <v-ons-icon style="color:green;padding-right:10px" icon="md-check" @click="saveFinancialYear(animation)"></v-ons-icon>
+            <v-ons-icon class="text__color" style="padding-right:10px" icon="md-check" @click="saveFinancialYear(animation)"></v-ons-icon>
           </div>
         </v-ons-toolbar>
-        <v-ons-input float placeholder="Financial Year Name" style="width:100%;font-family:Zawgyi-One;" v-model="year.name">
-        </v-ons-input>
+        <v-ons-list>
+            <v-ons-list-item style="padding:30px 15px">
+              <v-ons-input float placeholder="Financial Year Name" style="width:100%;font-family:Zawgyi-One;" v-model="year.name">
+              </v-ons-input>
+            </v-ons-list-item>
+          </v-ons-list>
       </v-ons-page>
     </v-ons-dialog>
-
   </v-ons-page>
 </template>
 <script>

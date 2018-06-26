@@ -27,7 +27,7 @@
         </v-ons-row>
       </v-ons-list-item>
       <v-ons-list-item>
-        <div v-for="item in thead" style="width:33%">
+        <div v-for="item in thead" style="width:25%">
           <div class="dataviewer-th sorting" @click="sort(item.key)" v-if="item.sort">
             <span>{{item.title}}</span>
             <span v-if="params.column === item.key">

@@ -1,18 +1,16 @@
 <template>
 	<v-ons-page>
 		  <custom-toolbar backLabel="Anim" :title="title">
-				<div v-if="authState.api_token && authState.user_id === income.user_id">
-					<template slot="right">
-						<v-ons-icon style="color:white; padding-right:10px" icon="md-edit" @click="incomeEdit(animation, income, apiUrl, month)"></v-ons-icon>
-						<v-ons-icon style="color:white" icon="md-delete"  @click="remove" :disabled="isRemoving"></v-ons-icon>
-					</template>
-				</div>
+				<template slot="right" v-if="authState.api_token && authState.user_id == income.user_id">
+					<v-ons-icon style="color:white; padding-right:10px" icon="md-edit" @click="incomeEdit(animation, income, apiUrl, month)"></v-ons-icon>
+					<v-ons-icon style="color:white" icon="md-delete"  @click="remove" :disabled="isRemoving"></v-ons-icon>
+				</template>
 		  </custom-toolbar>
         <v-ons-list>
               <v-ons-list-header>Text input</v-ons-list-header>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-                  <v-ons-icon icon="md-calendar-check" class="list-item__icon" style="color: green;"></v-ons-icon>
+                  <v-ons-icon icon="md-calendar-check" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
 									<v-ons-text style="width: 90%" type="date">{{income.date | moment('DD - MMM - YYYY')}}
@@ -21,7 +19,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
                     <v-ons-text v-text="income.name" float style="width:90%"> </v-ons-text>
@@ -29,7 +27,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
                     <v-ons-text type="number" v-text="income.amount" float style="width:90%"> </v-ons-text>
@@ -37,7 +35,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
                     <v-ons-text v-text="income.description" float style="width:90%"> </v-ons-text>
@@ -45,7 +43,7 @@
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
                     <v-ons-text v-text="income.remark" float style="width:90%"> </v-ons-text>
@@ -53,7 +51,7 @@
               </v-ons-list-item>
               <v-ons-list-item v-show="income.image != null" :modifier="md ? 'nodivider' : ''">
                 <div class="left">
-									<v-ons-icon icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+									<v-ons-icon icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                 </div>
                 <label class="center">
 									<img :src="imgLink + income.image" style="width: 100%">

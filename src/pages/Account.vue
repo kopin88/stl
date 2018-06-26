@@ -2,11 +2,27 @@
   <v-ons-page>
     <data-viewer  :source="source" :thead="thead" :filter="filter" :create="create" :title="title">
       <template slot-scope="props">
-        <tr @click="financialYear(animation, props.item)" :key="props.item.id">
+        <v-ons-list>
+          <v-ons-list-item :action="onAction" :key="props.item.id" @click="financialYear(animation, props.item)" modifier="chevron" class="list-item-container">
+            <div class="left" style="width:100px;">
+              <span>{{ props.item.name }}</span>
+              <!-- <img class="list-item__thumbnail" :src="imgLink + props.item.image" /> -->
+            </div>
+            <div class="center">
+              <span class="list-item__subtitle">စာရင္းဖြင့္ : {{ props.item.open_balance }}</span>
+              <span class="list-item__subtitle">လက္က်န္ : {{ props.item.balance }}</span>
+            </div>
+            <div class="right">
+              <!-- {{props.item.qty_total}} -->
+            </div>
+          </v-ons-list-item>
+        </v-ons-list>
+
+        <!-- <tr @click="financialYear(animation, props.item)" :key="props.item.id">
           <td class="text-center">{{props.item.name}}</td>
           <td class="text-right"><span style="padding-right:40px">{{props.item.open_balance}}</span></td>
           <td class="text-right"><span style="padding-right:40px">{{props.item.balance}}</span></td>
-        </tr>
+        </tr> -->
       </template>
     </data-viewer>
 
@@ -30,7 +46,7 @@
                 create: '/years/create',
                 source: apiDomain + '/years',
                 thead: [
-                    {title: 'FinancialYear', key: 'name', sort: true},
+                    {title: 'Financial Year', key: 'name', sort: true},
                     {title: 'Opening', key: 'open_balance', sort: true},
                     {title: 'Balance', key: 'balance', sort: true},
                     // {title: 'Remark', key: 'remark', sort: true},
@@ -41,6 +57,15 @@
             }
         },
     		methods: {
+          onPull(ratio) {
+            this.ratio = ratio;
+          },
+          onAction(done) {
+            setTimeout(() => {
+              this.items = [...this.items];
+              done();
+            }, 1500);
+          },
           createFinancialYear(name) {
             this.$store.commit('navigator/options', {
               // Sets animations

@@ -143,7 +143,14 @@ export default {
       post(apiDomain + `/suppliers/${this.form.id}?_method=PUT`, form)
         .then((res) => {
           if (res.data.saved) {
-            this.$store.commit('navigator/pop', {
+            this.$store.commit('navigator/options', {
+              // Sets animations
+              animation: 'default',
+              // item: data,
+              // Resets default options
+              callback: () => this.$store.commit('navigator/options', {})
+            })
+            this.$store.commit('navigator/replace', {
               extends: SupplierShow,
               data() {
                 return {

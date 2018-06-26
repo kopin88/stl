@@ -14,7 +14,7 @@
               <v-ons-icon icon="md-check" class="list-item__icon text__color" v-else></v-ons-icon>
             </div>
             <label class="center">
-              <v-ons-input float placeholder="Invoice No." v-model="form.invoice_no" style="width:100%">
+              <v-ons-input float placeholder="Voucher No." v-model="form.invoice_no" style="width:100%">
               </v-ons-input>
               <v-ons-text class="text__danger" v-if="error.invoice_no">{{"Invoice No. ထည့္ပါ"}}</v-ons-text>
             </label>
@@ -218,6 +218,7 @@
 <script>
 import Vue from 'vue'
 // import Flash from '../../../helpers/flash'
+import Auth from '../../../store/auth'
 import { get, post, apiDomain, imgUrl } from '../../../helpers/api'
 import Multiselect from 'vue-multiselect'
 import ImageUpload from '../../../components/ImageUpload.vue'
@@ -229,6 +230,7 @@ export default {
   // mixins: [ VueFocus.mixin ],
   data() {
     return {
+      authState: Auth.state,
       remBalance: false,
       discount: false,
       stockins: [],
@@ -328,6 +330,7 @@ export default {
     save() {
       // this.form.month_id = this.month.id
       this.modalVisible = true
+      this.form.user_id = this.authState.user_id
       const form = toMulipartedForm(this.form, this.meta)
       post(this.storeURL, form)
           .then((res) => {

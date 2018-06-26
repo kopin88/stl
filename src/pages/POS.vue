@@ -1,25 +1,47 @@
 <template>
   <v-ons-page>
-    <v-ons-card @click="stockInPush(animation, stockIns)">
-      <div class="title">Stock In </div>
-      <div class="content">Stock In details</div>
-    </v-ons-card>
-    <v-ons-card @click="stockOutPush(animation, stockOuts)">
-      <div class="title">Stock Out</div>
-      <div class="content">Stock Out details</div>
-    </v-ons-card>
-    <v-ons-card @click="itemPush(animation, items)">
-      <div class="title">Item list</div>
-      <div class="content">Item details</div>
-    </v-ons-card>
-    <v-ons-card @click="customerPush(animation, customers)">
-      <div class="title">Customers</div>
-      <div class="content">Customer details</div>
-    </v-ons-card>
-    <v-ons-card @click="supplierPush(animation, suppliers)">
-      <div class="title">Suppliers</div>
-      <div class="content">Supplier details</div>
-    </v-ons-card>
+    <v-ons-row>
+      <v-ons-col width="50%">
+        <v-ons-card @click="stockInPush(animation, stockIns)">
+          <v-ons-icon icon="fa-indent" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">ကုန္ပစၥည္း အ၀င္ (အ၀ယ္)</div>
+        </v-ons-card>
+      </v-ons-col>
+      <v-ons-col width="50%">
+        <v-ons-card @click="stockOutPush(animation, stockOuts)">
+          <v-ons-icon icon="fa-outdent" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">ကုန္ပစၥည္း အထြက္ (အေရာင္း)</div>
+        </v-ons-card>
+      </v-ons-col>
+    </v-ons-row>
+    <v-ons-row>
+      <v-ons-col width="50%">
+        <v-ons-card @click="supplierPush(animation, suppliers)">
+          <v-ons-icon icon="fa-address-book" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">Supplier List</div>
+        </v-ons-card>
+      </v-ons-col>
+      <v-ons-col width="50%">
+        <v-ons-card @click="customerPush(animation, customers)">
+          <v-ons-icon icon="fa-address-book" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">Customer List</div>
+        </v-ons-card>
+      </v-ons-col>
+    </v-ons-row>
+    <v-ons-row>
+      <v-ons-col width="50%">
+        <v-ons-card @click="itemPush(animation, items)">
+          <v-ons-icon icon="fa-list-ul" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">ပစၥည္း စာရင္း</div>
+        </v-ons-card>
+      </v-ons-col>
+      <v-ons-col width="50%">
+        <v-ons-card @click="userGuide(animation)">
+          <v-ons-icon icon="fa-question" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <div class="content card__content card--material__content">User Guide</div>
+        </v-ons-card>
+      </v-ons-col>
+    </v-ons-row>
   </v-ons-page>
 </template>
 
@@ -29,6 +51,7 @@ import CustomerIndex from '../views/POS/Customer/Index.vue';
 import SupplierIndex from '../views/POS/Supplier/Index.vue';
 import StockIn from '../views/POS/StockIn/Index.vue';
 import StockOut from '../views/POS/StockOut/Index.vue';
+import UserGuide from '../views/UserGuide/Index.vue';
 import { get, apiDomain, imgUrl } from '../helpers/api';
 
 export default {
@@ -154,27 +177,31 @@ export default {
           }
         }
       });
+    },
+    userGuide(name) {
+      this.$store.commit('navigator/options', {
+        // Sets animations
+        animation: name,
+        // Resets default options
+        callback: () => this.$store.commit('navigator/options', {})
+      });
+
+      this.$store.commit('navigator/push', {
+        extends: UserGuide,
+        data() {
+          return {
+            animation: name
+          }
+        }
+      });
     }
   }
 };
 </script>
 
 <style>
-.intro {
-  text-align: left;
-  padding: 0 22px;
-  margin-top: 20px;
+.content {
   font-size: 14px;
-  line-height: 1.4;
-  color: rgba(0, 0, 0, .54);
-}
-
-ons-card {
-  cursor: pointer;
-  color: #333;
-}
-
-.card__title, .card--material__title {
-  font-size: 20px;
+  text-align: center;
 }
 </style>

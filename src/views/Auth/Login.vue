@@ -5,7 +5,7 @@
     </v-ons-toolbar> -->
 
     <v-ons-card>
-        <img src="../../assets/stl-logo.png" alt="Wan Yu" style="width: 100%; padding:30px;">
+        <img src="../../assets/stl-logo.png" alt="Wan Yu" style="width: 100%; padding:30px 10px;">
       <div class="content">
         <v-ons-list>
           <!-- <v-ons-list-header>Login</v-ons-list-header> -->
@@ -92,7 +92,7 @@
 .list-item--material__left {
   min-width: 30px;
 }
-.list-item {  
+.list-item {
   min-height: 80px;
 }
 

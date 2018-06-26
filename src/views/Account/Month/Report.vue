@@ -4,9 +4,9 @@
 		<tbody>
 			<tr>
 				<th style="width:10%"></th>
-				<th style="width:50%">Cash Title</th>
+				<th style="width:50%">ေငြစာရင္းေခါင္းစဥ္</th>
 				<th style="width:20%">Amount</th>
-				<th style="width:20%">Remark</th>
+				<th style="width:20%">မွတ္ခ်က္</th>
 			</tr>
 			<tr>
 				<td colspan="4" class="theme__color"></td>
@@ -151,9 +151,9 @@
 					        this.isProcessing = false
 					    })
 					    .catch((err) => {
-					        // if(err.response.status === 422) {
-					        //     this.error = err.response.data
-					        // }
+					        if(err.status === 422) {
+					            this.error = err.data
+					        }
 					        this.isProcessing = false
 					    })
 			},
@@ -168,9 +168,9 @@
 					        this.isProcessing = false
 					    })
 					    .catch((err) => {
-					        // if(err.response.status === 422) {
-					        //     this.error = err.response.data
-					        // }
+					        if(err.status === 422) {
+					            this.error = err.data
+					        }
 					        this.isProcessing = false
 					    })
 			},
@@ -185,9 +185,9 @@
 					        this.isProcessing = false
 					    })
 					    .catch((err) => {
-					        // if(err.response.status === 422) {
-					        //     this.error = err.response.data
-					        // }
+					        if(err.status === 422) {
+					            this.error = err.data
+					        }
 					        this.isProcessing = false
 					    })
 			},

@@ -92,15 +92,9 @@
                 </label>
               </v-ons-list-item>
               <v-ons-list-item :modifier="md ? 'nodivider' : ''">
-                <div class="left">
-									<v-ons-icon v-if="form.image != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
-                  <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
-                </div>
-                <label class="center">
-									<image-upload v-model="form.image" :forderPath="forderPath"></image-upload>
-                    <v-ons-text class="text__danger" v-if="error.image">{{ error.image[0] }}
-                    </v-ons-text>
-                </label>
+								<image-upload v-model="form.image" :forderPath="forderPath" style="width:95%; padding-left:5px"></image-upload>
+								<v-ons-text class="text__danger" v-if="error.image">{{ error.image[0] }}
+								</v-ons-text>
               </v-ons-list-item>
         </v-ons-list>
 				<v-ons-modal
@@ -190,6 +184,13 @@
 				    .then((res) => {
 								const apiUrl = apiDomain
 				        if(res.data.saved) {
+									this.$store.commit('navigator/options', {
+					          // Sets animations
+					          animation: 'default',
+					          // item: data,
+					          // Resets default options
+					          callback: () => this.$store.commit('navigator/options', {})
+					        })
 									this.$store.commit('navigator/replace', {
 										extends: MonthShow,
 										data() {

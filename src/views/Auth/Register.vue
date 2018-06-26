@@ -1,20 +1,20 @@
 <template>
   	<v-ons-page>
   		  <custom-toolbar backLabel="Home" :title="'User Register'">
-  				<template slot="right" v-if="form.password === form.password_confirmation">
+  				<template slot="right" v-if="(form.name != '') && (form.email != '') && (form.password != '') && (form.password === form.password_confirmation) ">
   					<v-ons-icon style="color:white" icon="md-check" :disabled="isProcessing" @click="register"></v-ons-icon>
   			  </template>
   		  </custom-toolbar>
           <v-ons-list>
                 <v-ons-list-header>
                 <div class="info text-center">
-                  <h4>Wan Yu</h4>
+                  <h4>ေရႊသီးေလး</h4>
                 </div>
                 </v-ons-list-header>
 
                 <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                   <div class="left">
-  									<v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+  									<v-ons-icon v-if="form.name != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                     <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                   </div>
                   <label class="center">
@@ -26,7 +26,7 @@
 
                 <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                   <div class="left">
-  									<v-ons-icon v-if="form.email != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+  									<v-ons-icon v-if="form.email != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                     <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                   </div>
                   <label class="center">
@@ -38,7 +38,7 @@
 
                 <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                   <div class="left">
-  									<v-ons-icon v-if="form.password != ''" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+  									<v-ons-icon v-if="form.password != ''" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                     <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                   </div>
                   <label class="center">
@@ -50,7 +50,7 @@
 
                 <v-ons-list-item :modifier="md ? 'nodivider' : ''">
                   <div class="left">
-  									<v-ons-icon v-if="(form.password === form.password_confirmation) && (form.password_confirmation != '')" icon="md-label-alt" class="list-item__icon"  style="color: green;"></v-ons-icon>
+  									<v-ons-icon v-if="(form.password === form.password_confirmation) && (form.password_confirmation != '')" icon="md-label-alt" class="list-item__icon text__color"></v-ons-icon>
                     <v-ons-icon v-else icon="md-label-alt" class="list-item__icon"></v-ons-icon>
                   </div>
                   <label class="center">
