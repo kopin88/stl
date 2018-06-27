@@ -84,8 +84,8 @@ export default {
     autoComplete(){
         this.customers = [];
         if(this.searchquery.length >= 2){
-         axios.get('http://stl.wanyumm.com/api/search-customers',{params: {searchquery: this.searchquery}}).then(response => {
-            console.log(response);
+         axios.get('http://wanyumm.com/api/search-customers',{params: {searchquery: this.searchquery}}).then(response => {
+            // console.log(response);
           this.customers = response.data;
           this.status = response.status;
          });

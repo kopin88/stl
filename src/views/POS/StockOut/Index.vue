@@ -1,9 +1,9 @@
 <template>
 <v-ons-page>
     <custom-toolbar backLabel="Anim" :title="title">
-      <!-- <template slot="right">
-        <v-ons-icon style="color:white; padding-right:10px" icon="md-edit"  @click="editFinancialYear = true"></v-ons-icon>
-      </template> -->
+      <template slot="right">
+        <v-ons-icon style="color:white" icon="md-search" @click="searchStockOut(animation)"></v-ons-icon>
+      </template>
     </custom-toolbar>
   <data-viewer :source="source" :thead="thead" :filter="filter" :create="create" :title="title" style="padding-bottom:80px">
       <template slot-scope="props">
@@ -16,7 +16,7 @@
           </tr>
       </template>
   </data-viewer>
-  <v-ons-fab position="bottom right" @click="stockInAdd(animation)">
+  <v-ons-fab position="bottom right" @click="stockOutAdd(animation)">
     <v-ons-icon icon="md-plus"></v-ons-icon>
   </v-ons-fab>
 </v-ons-page>
@@ -27,6 +27,7 @@
     import Vue from 'vue'
     import DataViewer from '../../../components/StockDataViewer.vue'
     import StockOutShow from './Show.vue'
+    import StockOutSearch from './Search.vue'
     import StockOutForm from './Form.vue'
     import { apiDomain } from '../../../helpers/api'
     Vue.use(require('vue-moment'));
@@ -75,7 +76,7 @@
     					}
     				});
     			},
-          stockInAdd(name) {
+          stockOutAdd(name) {
     				this.$store.commit('navigator/options', {
     					// Sets animations
     					animation: name,
@@ -96,6 +97,24 @@
     					}
     				});
     			},
+          searchStockOut(name) {
+            this.$store.commit('navigator/options', {
+              // Sets animations
+              animation: name,
+              // Resets default options
+              callback: () => this.$store.commit('navigator/options', {})
+            });
+
+            this.$store.commit('navigator/push', {
+              extends: StockOutSearch,
+              data() {
+                return {
+                  animation: 'none',
+                  title: "",
+                }
+              }
+            });
+          }
         }
     }
 </script>

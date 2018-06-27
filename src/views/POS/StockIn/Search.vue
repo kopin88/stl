@@ -6,7 +6,7 @@
         style="color:white"
         id="search"
         class="search"
-        placeholder="  Select Item"
+        placeholder="  Search stock in"
         v-model="searchquery"
         v-on:keyup="autoComplete"
         v-focus="searchfocus"
@@ -84,8 +84,8 @@ export default {
     autoComplete(){
         this.stockins = [];
         if(this.searchquery.length >= 2){
-         axios.get('http://stl.wanyumm.com/api/search-stockins',{params: {searchquery: this.searchquery}}).then(response => {
-            console.log(response);
+         axios.get('http://wanyumm.com/api/search-stockins',{params: {searchquery: this.searchquery}}).then(response => {
+            // console.log(response);
           this.stockins = response.data;
           this.status = response.status;
          });

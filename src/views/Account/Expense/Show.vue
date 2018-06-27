@@ -117,7 +117,7 @@
 				this.modalVisible = true
 				post(apiDomain + `/expenses/${this.expense.id}?_method=DELETE`)
 					.then((res) => {
-						const apiUrl = 'http://stl.wanyumm.com/api'
+						const apiUrl = 'http://wanyumm.com/api'
 						if(res.data.deleted) {
 							this.$store.commit('navigator/replace', {
 								extends: MonthShow,

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import Auth from '../store/auth'
 
-export const apiDomain = 'http://stl.wanyumm.com/api'
-export const imgUrl = 'http://stl.wanyumm.com/images/'
+export const apiDomain = 'http://wanyumm.com/api'
+export const imgUrl = 'http://wanyumm.com/images/'
 // export const apiDomain = 'http://box.dev/api'
 // export const imgUrl = 'http://box.dev/images/'
 

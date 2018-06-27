@@ -6,7 +6,7 @@
         style="color:white"
         id="search"
         class="search"
-        placeholder="  Select Supplier"
+        placeholder="  Search Supplier"
         v-model="searchquery"
         v-on:keyup="autoComplete"
         v-focus="searchfocus"
@@ -84,8 +84,8 @@ export default {
     autoComplete(){
         this.suppliers = [];
         if(this.searchquery.length >= 2){
-         axios.get('http://stl.wanyumm.com/api/search-suppliers',{params: {searchquery: this.searchquery}}).then(response => {
-            console.log(response);
+         axios.get('http://wanyumm.com/api/search-suppliers',{params: {searchquery: this.searchquery}}).then(response => {
+            // console.log(response);
           this.suppliers = response.data;
           this.status = response.status;
          });

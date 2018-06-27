@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.wanyumm.stl" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>​ေရႊသီး​ေလး</name>
+    <name>Wan Yu</name>
     <description>
-      Project for Shwe Tee Lay
+      Project for Wan Yu
     </description>
-    <author email="kopin88@gmail.com" href="http://stl.wanyumm.com">
+    <author email="kopin88@gmail.com" href="http://wanyumm.com">
       Ko Pin
     </author>
     <content src="index.html" />
@@ -106,6 +106,6 @@
     </platform>
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <preference name="StatusBarBackgroundColor" value="#187bd1" />
+    <preference name="StatusBarBackgroundColor" value="#388E3C" />
     <engine name="android" spec="^7.0.0" />
 </widget>

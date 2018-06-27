@@ -38,7 +38,8 @@
       :thead="thead"
       :filter="filter"
       :create="create"
-      :title="title">
+      :title="title"
+       style="padding-bottom:80px">
       <template slot-scope="props">
         <v-ons-list>
           <v-ons-list-item :action="onAction" :key="props.item.id" @click="transition(animation, props.item)" modifier="chevron" class="list-item-container">

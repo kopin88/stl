@@ -76,6 +76,25 @@
 		          </div>
 		    	</v-ons-row>
 				</v-ons-card>
+        <v-ons-card>
+          <v-ons-text>
+            With Chart
+          </v-ons-text><br>
+          <!-- <div style="width:500px"> -->
+            <template>
+              <div class="table-responsive">
+  		            <table class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 1500px; margin-bottom:80px" role="grid" aria-describedby="datatables_info">
+                    <yearly
+                      :year_id="year.id"
+                      :height="300"
+                      >
+                    </yearly>
+    		          </table>
+              </div>
+            </template>
+          <!-- </div> -->
+        </v-ons-card>
+
 			      <v-ons-fab position="bottom right" @click="addMonth = true">
 			        <v-ons-icon icon="md-plus"></v-ons-icon>
 			      </v-ons-fab>
@@ -133,21 +152,6 @@
 			          <div class="alert-dialog-button"  @click="saveFinancialYear" :disabled="isProcessingYear">Save</div>
 			        </template>
 			      </v-ons-alert-dialog>
-              <v-ons-card>
-                <v-ons-text>
-                  With Chart
-                </v-ons-text><br>
-                <!-- <div style="width:500px"> -->
-                  <template>
-                    <yearly
-                      :year_id="year.id"
-                      :width="400"
-                      :height="200"
-                    >
-                    </yearly>
-                  </template>
-                <!-- </div> -->
-              </v-ons-card>
 
   </v-ons-page>
 </template>
@@ -194,10 +198,7 @@
 					'Outober': 'Outober',
 					'November': 'November',
 					'December': 'December'
-				},
-        monthName: {},
-        inTotalChart: {},
-        outTotalChart: {}
+				}
 			}
 		},
 		created() {
@@ -206,38 +207,35 @@
 					this.months = res.data.months
 					this.monthBalance = res.data.monthBalance
 					this.form = res.data.form
-          this.monthName = res.data.monthName
-          this.inTotalChart = res.data.inTotal
-          this.outTotalChart = res.data.outTotal
 				})
 		},
 		computed: {
-			OpenBalance() {
-					return this.months.reduce(function(carry, month) {
-							return carry + parseFloat(month.openBalance)
-					}, 0)
-			},
-			inTotal() {
-					return this.months.reduce(function(carry, month) {
-						if (month.in_total != null) {
-							return carry + parseFloat(month.in_total)
-						}else {
-							return month.in_total = 0
-						}
-					}, 0)
-			},
-			outTotal() {
-					return this.months.reduce(function(carry, month) {
-						if (month.out_total != null) {
-							return carry + parseFloat(month.out_total)
-						}else {
-							return month.out_total = 0
-						}
-					}, 0)
-			},
-			Balance() {
-					return (this.OpenBalance + this.inTotal) - parseFloat(this.outTotal)
-			}
+      OpenBalance() {
+          return this.months.reduce(function(carry, month) {
+              return carry + parseFloat(month.openBalance)
+          }, 0)
+      },
+      inTotal() {
+          return this.months.reduce(function(carry, month) {
+            if (month.in_total != null) {
+              return carry + parseFloat(month.in_total)
+            }else {
+              return month.in_total = 0
+            }
+          }, 0)
+      },
+      outTotal() {
+          return this.months.reduce(function(carry, month) {
+            if (month.out_total != null) {
+              return carry + parseFloat(month.out_total)
+            }else {
+              return month.out_total = 0
+            }
+          }, 0)
+      },
+      Balance() {
+          return (this.OpenBalance + this.inTotal) - parseFloat(this.outTotal)
+      }
 		},
 		methods: {
 			saveFinancialYear() {

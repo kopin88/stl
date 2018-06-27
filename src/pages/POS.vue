@@ -3,13 +3,13 @@
     <v-ons-row>
       <v-ons-col width="50%">
         <v-ons-card @click="stockInPush(animation, stockIns)">
-          <v-ons-icon icon="fa-indent" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-indent" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">ကုန္ပစၥည္း အ၀င္ (အ၀ယ္)</div>
         </v-ons-card>
       </v-ons-col>
       <v-ons-col width="50%">
         <v-ons-card @click="stockOutPush(animation, stockOuts)">
-          <v-ons-icon icon="fa-outdent" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-outdent" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">ကုန္ပစၥည္း အထြက္ (အေရာင္း)</div>
         </v-ons-card>
       </v-ons-col>
@@ -17,13 +17,13 @@
     <v-ons-row>
       <v-ons-col width="50%">
         <v-ons-card @click="supplierPush(animation, suppliers)">
-          <v-ons-icon icon="fa-address-book" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-address-book" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">Supplier List</div>
         </v-ons-card>
       </v-ons-col>
       <v-ons-col width="50%">
         <v-ons-card @click="customerPush(animation, customers)">
-          <v-ons-icon icon="fa-address-book" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-address-book" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">Customer List</div>
         </v-ons-card>
       </v-ons-col>
@@ -31,13 +31,13 @@
     <v-ons-row>
       <v-ons-col width="50%">
         <v-ons-card @click="itemPush(animation, items)">
-          <v-ons-icon icon="fa-list-ul" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-list-ul" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">ပစၥည္း စာရင္း</div>
         </v-ons-card>
       </v-ons-col>
       <v-ons-col width="50%">
         <v-ons-card @click="userGuide(animation)">
-          <v-ons-icon icon="fa-question" size="130px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
+          <v-ons-icon icon="fa-question" size="50px" class="text__color" style="line-height:normal; text-align:center"></v-ons-icon>
           <div class="content card__content card--material__content">User Guide</div>
         </v-ons-card>
       </v-ons-col>

@@ -1,7 +1,7 @@
 <template>
   <v-ons-page modifier="white">
     <div class="profile-pic">
-      <img src="../assets/stl-logo.png">
+      <img src="../assets/wan-yu-logo.png">
     </div>
 
     <!-- <v-ons-list-title>Access</v-ons-list-title> -->

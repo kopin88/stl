@@ -5,7 +5,7 @@
     </v-ons-toolbar> -->
 
     <v-ons-card>
-        <img src="../../assets/stl-logo.png" alt="Wan Yu" style="width: 100%; padding:30px 10px;">
+        <img src="../../assets/wan-yu-logo.png" alt="Wan Yu" style="width: 100%; padding:30px 10px;">
       <div class="content">
         <v-ons-list>
           <!-- <v-ons-list-header>Login</v-ons-list-header> -->

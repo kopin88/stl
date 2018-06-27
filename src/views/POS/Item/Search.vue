@@ -6,7 +6,7 @@
         style="color:white"
         id="search"
         class="search"
-        placeholder="  Select Item"
+        placeholder="  Search item"
         v-model="searchquery"
         v-on:keyup="autoComplete"
         v-focus="searchfocus"
@@ -85,8 +85,8 @@ export default {
     autoComplete(){
         this.items = [];
         if(this.searchquery.length >= 2){
-         axios.get('http://stl.wanyumm.com/api/search-items',{params: {searchquery: this.searchquery}}).then(response => {
-            console.log(response);
+         axios.get('http://wanyumm.com/api/search-items',{params: {searchquery: this.searchquery}}).then(response => {
+            // console.log(response);
           this.items = response.data;
           this.status = response.status;
          });

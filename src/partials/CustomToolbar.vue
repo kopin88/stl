@@ -1,5 +1,5 @@
 <template>
-  <v-ons-toolbar style="backgroundColor:#1E88E5">
+  <v-ons-toolbar class="toolbar__color">
     <div class="left">
       <slot name="left">
         <v-ons-back-button v-if="backLabel">

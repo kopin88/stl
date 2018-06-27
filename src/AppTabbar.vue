@@ -62,25 +62,25 @@ export default {
         //   label: 'Home',
         //   icon: this.md ? null : 'ion-home',
         //   page: Home,
-        //   theme: blue
+        //   theme: green
         // },
         {
           label: 'ကုန္ပစၥည္း စာရင္း',
           icon: this.md ? null : 'ion-plus',
           page: POS,
-          theme: blue
+          theme: green
         },
         {
           label: 'ေငြစာရင္း',
           icon: this.md ? null : 'ion-edit',
           page: Account,
-          theme: blue
+          theme: green
         },
         {
           label: 'လုပ္ေဆာင္ရန္',
           icon: this.md ? null : 'ion-flag',
           page: Action,
-          theme: blue
+          theme: green
         },
         // {
         //   label: this.md ? null : 'Camera',
@@ -129,7 +129,7 @@ export default {
       }
     },
     title() {
-      return this.md ? '​ေရႊသီး​ေလး' : this.tabs[this.index].title || this.tabs[this.index].label;
+      return this.md ? 'Wan Yu' : this.tabs[this.index].title || this.tabs[this.index].label;
     },
     swipeTheme() {
       return this.md && {
